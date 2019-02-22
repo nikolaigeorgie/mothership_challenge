@@ -1,0 +1,3 @@
+rootProject.name = 'mothership_challenge'
+
+include ':app'
