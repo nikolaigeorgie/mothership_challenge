@@ -1,12 +1,17 @@
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
+import MapboxGL from '@mapbox/react-native-mapbox-gl';
 
 class DirectionsScreenView extends PureComponent {
   render() {
-    // TODO: Add map box + search UI
+    // TODO: add search UI
     return (
-      <View style={{ backgroundColor: 'blue', flex: 1 }}>
-        <View />
+      <View style={{ flex: 1 }}>
+        <MapboxGL.MapView
+          centerCoordinate={[-118, 34]}
+          style={{ flex: 1 }}
+          zoomLevel={11}
+        />
       </View>
     );
   }
