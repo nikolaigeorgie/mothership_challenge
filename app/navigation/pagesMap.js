@@ -1,3 +1,5 @@
-import AppScreen from '../scenes/App';
+import DirectionsScreen from '../scenes/DirectionsScreen';
 
-export const pagesMap = [{ id: 'AppScreen', component: AppScreen }];
+export const pagesMap = [
+  { id: 'DirectionsScreen', component: DirectionsScreen },
+];

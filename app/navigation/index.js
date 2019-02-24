@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navigation } from 'react-native-navigation';
+import Routes from './Routes';
 import { pagesMap } from './pagesMap';
 
 export function makeContainer(containerToWrap) {
@@ -28,7 +29,7 @@ export function startApp() {
     Navigation.setRoot({
       root: {
         component: {
-          name: 'AppScreen',
+          name: Routes.DirectionsScreen,
         },
       },
     });

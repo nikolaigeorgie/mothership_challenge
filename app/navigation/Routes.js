@@ -1,5 +1,5 @@
 const Routes = {
-  AppScreen: 'AppScreen',
+  DirectionsScreen: 'DirectionsScreen',
 };
 
 export default Routes;
