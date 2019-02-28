@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { EmitterSubscription, Keyboard } from 'react-native';
 import { client as MapboxClient } from '../../../config/MapboxClient';
 import FromToSearchView from './Views';
+import { IAddressGeometry } from '../../../scenes/DirectionsScreen';
 
 type Props = {
   applySearchResults(
@@ -10,11 +11,6 @@ type Props = {
   ): void;
   isDirectionsDrawn: boolean;
 };
-
-interface IAddressGeometry {
-  coordinates: Array<number>;
-  type: string;
-}
 
 export interface IAddressItem {
   id: string;
@@ -158,7 +154,7 @@ class FromToSearch extends PureComponent<Props, State> {
       geometry: { coordinates },
     } = item;
     Keyboard.dismiss();
-    const { currentSelection, fromAddress, toAddress } = this.state;
+    const { currentSelection } = this.state;
     // @ts-ignore TODO: research why interpolation is not work with type screen
     await this.setState({
       [currentSelection]: {
@@ -175,8 +171,8 @@ class FromToSearch extends PureComponent<Props, State> {
       this.state.toAddress.isAddressSelected
     ) {
       this.props.applySearchResults(
-        fromAddress.selectedCoordinates,
-        toAddress.selectedCoordinates,
+        this.state.fromAddress.selectedCoordinates,
+        this.state.toAddress.selectedCoordinates,
       );
     }
   }
