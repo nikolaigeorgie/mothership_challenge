@@ -4,17 +4,29 @@ import { client as MapboxClient } from '../../../config/MapboxClient';
 import FromToSearchView from './Views';
 
 type Props = {
-  // TODO: Add necessary prop for on address selection
+  applySearchResults(
+    fromAddressCoordinates: Array<number>,
+    toAddressCoordinates: Array<number>,
+  ): void;
+  isDirectionsDrawn: boolean;
 };
 
+interface IAddressGeometry {
+  coordinates: Array<number>;
+  type: string;
+}
+
 export interface IAddressItem {
-  // TODO: add address shape
+  id: string;
+  place_name: string;
+  relevance: number;
+  geometry: IAddressGeometry;
 }
 
 export interface IAddress {
   data: Array<IAddressItem>;
   value: string;
-  selectedCoordinates: Array<string>;
+  selectedCoordinates: Array<number>;
   isAddressSelected: boolean;
 }
 
@@ -54,6 +66,31 @@ class FromToSearch extends PureComponent<Props, State> {
     this.onFocusFromAddressField = this.onFocusFromAddressField.bind(this);
     this.keyboardWillShow = this.keyboardWillShow.bind(this);
     this.keyboardWillHide = this.keyboardWillHide.bind(this);
+    this.onAddressSelection = this.onAddressSelection.bind(this);
+  }
+
+  componentWillReceiveProps(props: any) {
+    // Handles re-setting state to initial state.
+    if (props.isDirectionsDrawn === false) {
+      this.setState({
+        currentSelection: '',
+        fromAddress: {
+          data: [],
+          value: '',
+          selectedCoordinates: [],
+          isAddressSelected: false,
+        },
+        toAddress: {
+          data: [],
+          value: '',
+          selectedCoordinates: [],
+          isAddressSelected: false,
+        },
+        isKeyboardVisible: false,
+        addressListIsOpen: false,
+      });
+    }
+    return null;
   }
 
   componentDidMount() {
@@ -100,6 +137,11 @@ class FromToSearch extends PureComponent<Props, State> {
         entity: { features: data },
       } = await MapboxClient.geocodeForward(value, {
         limit: 4,
+        types: 'address',
+        country: 'us',
+        // TODO add proximity variable
+        // ^ Bias the response to favor results that are closer to this location,
+        // ^ provided as two comma-separated coordinates in longitude,latitude order.
       });
       // @ts-ignore TODO: research why interpolation is not work with type screen
       this.setState({
@@ -107,6 +149,35 @@ class FromToSearch extends PureComponent<Props, State> {
       });
     } catch (err) {
       // TODO: handle report error
+    }
+  }
+
+  async onAddressSelection(item: IAddressItem) {
+    const {
+      place_name,
+      geometry: { coordinates },
+    } = item;
+    Keyboard.dismiss();
+    const { currentSelection, fromAddress, toAddress } = this.state;
+    // @ts-ignore TODO: research why interpolation is not work with type screen
+    await this.setState({
+      [currentSelection]: {
+        data: this.state[currentSelection].data,
+        value: place_name,
+        selectedCoordinates: coordinates,
+        isAddressSelected: true,
+      },
+      currentSelection: '',
+    });
+
+    if (
+      this.state.fromAddress.isAddressSelected &&
+      this.state.toAddress.isAddressSelected
+    ) {
+      this.props.applySearchResults(
+        fromAddress.selectedCoordinates,
+        toAddress.selectedCoordinates,
+      );
     }
   }
 
@@ -119,6 +190,8 @@ class FromToSearch extends PureComponent<Props, State> {
         onFocusFromAddressField={this.onFocusFromAddressField}
         onFocusToAddressField={this.onFocusToAddressField}
         addressListIsOpen={this.state.addressListIsOpen}
+        currentSelection={this.state.currentSelection}
+        onAddressSelection={this.onAddressSelection}
       />
     );
   }

@@ -4,19 +4,18 @@ import { ImageSourcePropType } from 'react-native';
 
 export type Props = {
   componentId: string;
-  rightButtonOnPress(): void;
+  leftImage: ImageSourcePropType;
   rightImage: ImageSourcePropType;
+  leftButtonOnPress: () => void;
+  rightButtonOnPress(): void;
 };
 
 class StandardNavBar extends PureComponent<Props> {
-  menuOnPress = () => {
-    // TODO : Handle left menu open
-  };
-
   render() {
     return (
       <StandardNavBarView
-        menuOnPress={this.menuOnPress}
+        leftButtonOnPress={this.props.leftButtonOnPress}
+        leftImage={this.props.leftImage}
         rightButtonOnPress={this.props.rightButtonOnPress}
         rightImage={this.props.rightImage}
       />

@@ -1,25 +1,58 @@
 import React, { PureComponent } from 'react';
 import DirectionsScreenView from './Views';
 
-interface Props {
+type Props = {
   componentId: string;
-}
+};
 
-class DirectionsScreen extends PureComponent<Props> {
+type State = {
+  isDirectionsDrawn: boolean;
+};
+
+class DirectionsScreen extends PureComponent<Props, State> {
   constructor(props: Readonly<Props>) {
     super(props);
-    this.rightButtonOnPress = this.rightButtonOnPress.bind(this);
+    this.state = {
+      isDirectionsDrawn: false,
+    };
+    this.navRightButtonOnPress = this.navRightButtonOnPress.bind(this);
+    this.navLeftButtonOnPress = this.navLeftButtonOnPress.bind(this);
+    this.applySearchResults = this.applySearchResults.bind(this);
+    this.clearDrawnDirections = this.clearDrawnDirections.bind(this);
   }
 
-  rightButtonOnPress() {
-    // TODO: Handle right button on press (right menu open)
+  navRightButtonOnPress() {
+    // TODO: Handle right nav button interaction
+  }
+
+  navLeftButtonOnPress() {
+    if (this.state.isDirectionsDrawn) {
+      return this.setState({ isDirectionsDrawn: false });
+    }
+    // TODO: Handle left nav menu open
+  }
+
+  clearDrawnDirections() {
+    this.setState({ isDirectionsDrawn: false });
+  }
+
+  applySearchResults(
+    fromAddressCoordinates: Array<number>,
+    toAddressCoordinates: Array<number>,
+  ) {
+    this.setState({ isDirectionsDrawn: true });
+    console.log(fromAddressCoordinates, toAddressCoordinates);
+    // TODO: handle map drawing
   }
 
   render() {
     return (
       <DirectionsScreenView
         componentId={this.props.componentId}
-        rightButtonOnPress={this.rightButtonOnPress}
+        navRightButtonOnPress={this.navRightButtonOnPress}
+        navLeftButtonOnPress={this.navLeftButtonOnPress}
+        applySearchResults={this.applySearchResults}
+        isDirectionsDrawn={this.state.isDirectionsDrawn}
       />
     );
   }

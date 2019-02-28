@@ -3,7 +3,8 @@ import { LayoutAnimation, View, Animated } from 'react-native';
 import StandardInput from '../../../Inputs/StandardInput';
 import { springAnimation } from '../../../../utils/LayoutAnimations';
 import styles from './styles';
-import { IAddress } from '../index';
+import { IAddress, IAddressItem } from '../index';
+import AddressesList from '../../../Lists/AddressesList';
 
 type Props = {
   addressListIsOpen: boolean;
@@ -12,6 +13,8 @@ type Props = {
   onFocusToAddressField(): void;
   fromAddress: IAddress;
   toAddress: IAddress;
+  currentSelection: string;
+  onAddressSelection(item: IAddressItem): Promise<void>;
 };
 
 class FromToSearchView extends PureComponent<Props> {
@@ -40,7 +43,17 @@ class FromToSearchView extends PureComponent<Props> {
           </View>
         </View>
         {this.props.addressListIsOpen && (
-          <Animated.View style={styles.addressContainer} />
+          <Animated.View style={styles.addressContainer}>
+            <AddressesList
+              currentSelection={this.props.currentSelection}
+              data={
+                this.props.currentSelection === 'fromAddress'
+                  ? this.props.fromAddress.data
+                  : this.props.toAddress.data
+              }
+              onAddressSelection={this.props.onAddressSelection}
+            />
+          </Animated.View>
         )}
       </View>
     );
