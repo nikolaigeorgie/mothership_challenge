@@ -1,9 +1,27 @@
 import React, { PureComponent } from 'react';
 import DirectionsScreenView from './Views';
 
-class DirectionsScreen extends PureComponent {
+interface Props {
+  componentId: string;
+}
+
+class DirectionsScreen extends PureComponent<Props> {
+  constructor(props: Readonly<Props>) {
+    super(props);
+    this.rightButtonOnPress = this.rightButtonOnPress.bind(this);
+  }
+
+  rightButtonOnPress() {
+    // TODO: Handle right button on press (right menu open)
+  }
+
   render() {
-    return <DirectionsScreenView />;
+    return (
+      <DirectionsScreenView
+        componentId={this.props.componentId}
+        rightButtonOnPress={this.rightButtonOnPress}
+      />
+    );
   }
 }
 
