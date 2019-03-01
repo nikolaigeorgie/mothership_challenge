@@ -8,7 +8,7 @@ import {
 import { Images, Scaled } from '../../../../themes';
 import styles from './styles';
 
-export type Props = {
+type Props = {
   leftImage: ImageSourcePropType;
   rightImage: ImageSourcePropType;
   leftButtonOnPress: () => void;

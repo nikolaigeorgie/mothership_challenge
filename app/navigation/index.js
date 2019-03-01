@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Navigation } from 'react-native-navigation';
+import { Provider } from 'react-redux';
 import Routes from './Routes';
 import { pagesMap } from './pagesMap';
+import configureStore from '../redux/store';
+
+export const store = configureStore();
 
 export function makeContainer(containerToWrap) {
   const WrappedContainer = containerToWrap;
@@ -13,8 +17,11 @@ export function makeContainer(containerToWrap) {
 }
 
 export function registerScreen(pageMapItem) {
-  Navigation.registerComponent(pageMapItem.id, () =>
-    makeContainer(pageMapItem.component),
+  Navigation.registerComponentWithRedux(
+    pageMapItem.id,
+    () => makeContainer(pageMapItem.component),
+    Provider,
+    store,
   );
 }
 

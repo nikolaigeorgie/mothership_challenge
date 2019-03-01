@@ -1,44 +1,18 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import DirectionsScreenView from './Views';
 import { getMapDirections } from '../../utils/MapBoxUtils';
+import { addDelivery } from '../../redux/Deliveries/actions';
+import { IDeliverySearchResult } from '../../redux/Deliveries/interfaces';
 
 type Props = {
   componentId: string;
+  addDelivery(entity: IDeliverySearchResult): void;
 };
-
-export interface IAddressGeometry {
-  coordinates: Array<Array<number>>;
-  type: string;
-}
-
-export interface ISteps {
-  distance: number;
-  driving_side: string;
-  duration: number;
-  geometry: IAddressGeometry;
-  mode: string;
-  name: string;
-  // TODO: Before requiring see if following props are needed:
-  // intersections:
-  // maneuver
-}
-
-export interface IRoute {
-  distance: number;
-  duration: number;
-  geometry: IAddressGeometry;
-  legs: Array<ISteps>;
-}
-
-export interface IFromToCoordinates {
-  toAddressCoordinates: Array<number>;
-  fromAddressCoordinates: Array<number>;
-}
 
 type State = {
   isDirectionsDrawn: boolean;
-  currentRoute: IRoute;
-  fromToCoordinates: IFromToCoordinates;
+  searchAddresses: IDeliverySearchResult;
 };
 
 class DirectionsScreen extends PureComponent<Props, State> {
@@ -49,11 +23,8 @@ class DirectionsScreen extends PureComponent<Props, State> {
     this.state = {
       isDirectionsDrawn: false,
       // @ts-ignore No initial value seems necessary to set
-      currentRoute: {},
-      fromToCoordinates: {
-        fromAddressCoordinates: [],
-        toAddressCoordinates: [],
-      },
+      // @ts-ignore No initial value seems necessary to set
+      searchAddresses: {},
     };
     this.navRightButtonOnPress = this.navRightButtonOnPress.bind(this);
     this.navLeftButtonOnPress = this.navLeftButtonOnPress.bind(this);
@@ -86,20 +57,15 @@ class DirectionsScreen extends PureComponent<Props, State> {
     fromAddressCoordinates: Array<number>,
     toAddressCoordinates: Array<number>,
   ) {
-    // padding for all sides
     try {
-      const currentRoute = await getMapDirections(
+      const searchAddresses = await getMapDirections(
         fromAddressCoordinates,
         toAddressCoordinates,
       );
 
       await this.setState({
         isDirectionsDrawn: true,
-        currentRoute,
-        fromToCoordinates: {
-          fromAddressCoordinates,
-          toAddressCoordinates,
-        },
+        searchAddresses,
       });
       await this.mapView.fitBounds(
         [fromAddressCoordinates[0], fromAddressCoordinates[1]],
@@ -107,6 +73,8 @@ class DirectionsScreen extends PureComponent<Props, State> {
         20,
         1000,
       );
+      // TODO: Add object here
+      await this.props.addDelivery(searchAddresses);
     } catch (err) {
       // TODO: handle error reporter
     }
@@ -120,12 +88,24 @@ class DirectionsScreen extends PureComponent<Props, State> {
         navLeftButtonOnPress={this.navLeftButtonOnPress}
         applySearchResults={this.applySearchResults}
         isDirectionsDrawn={this.state.isDirectionsDrawn}
-        currentRoute={this.state.currentRoute}
+        routes={this.state.searchAddresses.routes}
         registerMapRef={this.registerMapRef}
-        fromToCoordinates={this.state.fromToCoordinates}
+        waypoints={this.state.searchAddresses.waypoints}
       />
     );
   }
 }
 
-export default DirectionsScreen;
+const mapDispatchToProps = (
+  dispatch: (arg0: (dispatch: any) => Promise<any>) => void,
+) => ({
+  addDelivery: (payload: IDeliverySearchResult) =>
+    dispatch(addDelivery(payload)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(DirectionsScreen);
+
+// export default DirectionsScreen;

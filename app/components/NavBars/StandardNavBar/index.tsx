@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import StandardNavBarView from './Views';
 import { ImageSourcePropType } from 'react-native';
 
-export type Props = {
+type Props = {
   componentId: string;
   leftImage: ImageSourcePropType;
   rightImage: ImageSourcePropType;

@@ -1,0 +1,1 @@
+export const ADDED_ENTRY = 'DELIVERIES.ADDED_ENTRY';

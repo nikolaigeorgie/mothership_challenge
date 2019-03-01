@@ -4,9 +4,7 @@ export const getMapDirections = async (
   fromAddressCoordinates,
   toAddressCoordinates,
 ) => {
-  const {
-    entity: { routes },
-  } = await client.getDirections(
+  const { entity } = await client.getDirections(
     [
       {
         latitude: fromAddressCoordinates[1],
@@ -19,6 +17,5 @@ export const getMapDirections = async (
     ],
     { profile: 'driving', geometry: 'polyline' },
   );
-  // TODO Create a safer return of first route.
-  return routes[0];
+  return entity;
 };
