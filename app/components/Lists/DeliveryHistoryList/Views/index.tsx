@@ -9,12 +9,16 @@ type Props = {
   data: Array<IDeliverySearchResult>;
 };
 
+const keyExtractor = (item: IDeliverySearchResult) =>
+  `DeliveryHistoryList.${item.uuid}`;
+
 class DeliveryHistoryListView extends PureComponent<Props> {
   render() {
     return (
       <FlatList
         ListHeaderComponent={<Text style={styles.header}>Ride History</Text>}
         data={this.props.data}
+        keyExtractor={keyExtractor}
         renderItem={this.props.renderItem}
       />
     );
