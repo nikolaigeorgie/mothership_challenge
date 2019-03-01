@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Navigation } from 'react-native-navigation';
 import QuoteScreenView from './Views';
+import { createQuoteForDelivery } from '../../redux/Deliveries/actions';
+import Routes from '../../navigation/Routes';
 
 type Props = {
   componentId: string;
@@ -60,7 +62,21 @@ class QuoteScreen extends PureComponent<Props, State> {
 
   async createQuoteOnPress() {
     // TODO: create quote here
-    // this.setState({ loading: true });
+    this.setState({ loading: true });
+    try {
+      await createQuoteForDelivery();
+      Navigation.push(this.props.componentId, {
+        component: {
+          name: Routes.SummaryScreen,
+          passProps: {
+            // TODO: navigate
+          },
+        },
+      });
+    } catch (err) {
+      // TODO: Handle error report
+    }
+    this.setState({ loading: false });
   }
 
   render() {

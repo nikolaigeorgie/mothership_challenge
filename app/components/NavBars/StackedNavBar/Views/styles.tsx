@@ -3,10 +3,11 @@ import { Colors, Scaled } from '../../../../themes';
 
 export default StyleSheet.create({
   container: {
-    height: Scaled.screen.height * 0.15,
-    marginLeft: Scaled.screen.width * 0.05,
-    justifyContent: 'space-around',
+    marginHorizontal: Scaled.screen.width * 0.05,
+    justifyContent: 'space-between',
     marginTop: Scaled.navBarOffset,
+    flexDirection: 'row',
+    height: Scaled.screen.height * 0.1,
   },
   leftImage: {
     height: Scaled.screen.width * 0.07,

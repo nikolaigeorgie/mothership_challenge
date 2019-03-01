@@ -90,12 +90,11 @@ class DirectionsScreen extends PureComponent<Props, State> {
   }
 
   nextButtonOnPress() {
-    console.log(this.state.searchAddresses)
     Navigation.push(this.props.componentId, {
       component: {
         name: Routes.QuoteScreen,
         passProps: {
-          // accessedFromProfile,
+          // TODO: Pass in necessary data for quote creation
         },
       },
     });

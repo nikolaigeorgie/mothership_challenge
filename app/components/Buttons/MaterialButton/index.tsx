@@ -16,6 +16,7 @@ class MaterialButton extends PureComponent<Props> {
     width: '90%',
     backgroundColor: Colors.taxiYellow,
     disabled: false,
+    loading: false,
   };
 
   render() {
