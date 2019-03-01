@@ -2,7 +2,10 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 import DirectionsScreenView from './Views';
-import { getMapDirections } from '../../utils/MapBoxUtils';
+import {
+  getMapDirections,
+  mapBoxBoundFormatter,
+} from '../../utils/MapBoxUtils';
 import { addDelivery } from '../../redux/Deliveries/actions';
 import { IDeliverySearchResult } from '../../redux/Deliveries/interfaces';
 import Routes from '../../navigation/Routes';
@@ -76,13 +79,10 @@ class DirectionsScreen extends PureComponent<Props, State> {
         isDirectionsDrawn: true,
         searchAddresses,
       });
+
       await this.mapView.fitBounds(
-        [fromAddressCoordinates[0], fromAddressCoordinates[1]],
-        [toAddressCoordinates[0], toAddressCoordinates[1]],
-        20,
-        1000,
+        ...mapBoxBoundFormatter(fromAddressCoordinates, toAddressCoordinates),
       );
-      // TODO: Add object here
       await this.props.addDelivery(searchAddresses);
     } catch (err) {
       // TODO: handle error reporter
@@ -121,5 +121,3 @@ export default connect(
   null,
   mapDispatchToProps,
 )(DirectionsScreen);
-
-// export default DirectionsScreen;
