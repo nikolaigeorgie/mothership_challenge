@@ -5,6 +5,7 @@ import { springAnimation } from '../../../../utils/LayoutAnimations';
 import styles from './styles';
 import { IAddress, IAddressItem } from '../index';
 import AddressesList from '../../../Lists/AddressesList';
+import FromToLine from '../../../Views/FromToLine';
 
 type Props = {
   addressListIsOpen: boolean;
@@ -26,7 +27,7 @@ class FromToSearchView extends PureComponent<Props> {
     return (
       <View style={[styles.container]}>
         <View style={styles.inputFieldsContainer}>
-          {/* TODO : Add ui line start to end */}
+          <FromToLine />
           <View style={styles.searchContainer}>
             <StandardInput
               onChangeText={this.props.searchForAddress}

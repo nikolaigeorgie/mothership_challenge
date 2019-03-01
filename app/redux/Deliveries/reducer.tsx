@@ -1,7 +1,7 @@
 import { ADDED_ENTRY } from './types';
 
 const initialState = {
-  data: [{ hey: 'yo' }],
+  data: [],
 };
 
 export default function reducer(state = initialState, action: any = {}) {
