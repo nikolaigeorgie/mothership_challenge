@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 import styles from './styles';
 
 type Props = {
@@ -7,6 +7,8 @@ type Props = {
   text: string;
   backgroundColor: string;
   width: string | number;
+  disabled: boolean;
+  loading: boolean;
 };
 
 class MaterialButtonView extends PureComponent<Props> {
@@ -14,15 +16,21 @@ class MaterialButtonView extends PureComponent<Props> {
     return (
       <TouchableOpacity
         onPress={this.props.onPress}
+        disabled={this.props.disabled}
         style={[
           styles.button,
           {
             backgroundColor: this.props.backgroundColor,
             width: this.props.width,
+            opacity: this.props.disabled ? 0.3 : 1,
           },
         ]}
       >
-        <Text style={styles.text}>{this.props.text}</Text>
+        {this.props.loading ? (
+          <ActivityIndicator />
+        ) : (
+          <Text style={styles.text}>{this.props.text}</Text>
+        )}
       </TouchableOpacity>
     );
   }

@@ -90,7 +90,15 @@ class DirectionsScreen extends PureComponent<Props, State> {
   }
 
   nextButtonOnPress() {
-    // TODO: Navigate to new screen to show summary
+    console.log(this.state.searchAddresses)
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: Routes.QuoteScreen,
+        passProps: {
+          // accessedFromProfile,
+        },
+      },
+    });
   }
 
   render() {

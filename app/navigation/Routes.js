@@ -6,6 +6,7 @@ const Routes = {
   // SCREENS
   DirectionsScreen: 'DirectionsScreen',
   RideHistoryScreen: 'RideHistoryScreen',
+  QuoteScreen: 'QuoteScreen',
 };
 
 export default Routes;

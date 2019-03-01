@@ -8,6 +8,7 @@ const colors = {
   charcoal: 'rgb(53, 54, 56)',
   black: 'black',
   taxiYellow: 'rgb(255, 203, 0)',
+  blue: 'rgb(42, 63, 160)',
 };
 
 export default colors;

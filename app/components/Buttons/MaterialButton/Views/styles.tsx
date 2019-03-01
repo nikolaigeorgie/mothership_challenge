@@ -7,6 +7,7 @@ export default StyleSheet.create({
     maxHeight: 60,
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
   },
   text: {
     color: Colors.black,

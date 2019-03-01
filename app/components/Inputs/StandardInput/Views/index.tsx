@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { TextInput } from 'react-native';
 import styles from './styles';
+import { Colors } from '../../../../themes';
 
 type Props = {
   width: string;
@@ -16,7 +17,7 @@ class StandardInputView extends PureComponent<Props> {
       <TextInput
         style={[styles.input, { width: this.props.width }]}
         placeholder={this.props.placeholder}
-        placeholderTextColor={'grey'}
+        placeholderTextColor={Colors.grey}
         value={this.props.value}
         onFocus={this.props.onFocus}
         onChangeText={this.props.onChangeText}
