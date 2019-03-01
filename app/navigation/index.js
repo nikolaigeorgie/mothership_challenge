@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Routes from './Routes';
 import { pagesMap } from './pagesMap';
 import configureStore from '../redux/store';
+import { Colors } from '../themes';
 
 export const store = configureStore();
 
@@ -33,10 +34,42 @@ export function startApp() {
   registerScreens();
 
   Navigation.events().registerAppLaunchedListener(() => {
+    Navigation.setDefaultOptions({
+      topBar: {
+        visible: false,
+      },
+      layout: {
+        backgroundColor: Colors.white,
+      },
+    });
+
     Navigation.setRoot({
       root: {
-        component: {
-          name: Routes.DirectionsScreen,
+        sideMenu: {
+          center: {
+            stack: {
+              id: Routes.CenterMenuView,
+              children: [
+                {
+                  component: {
+                    name: Routes.DirectionsScreen,
+                  },
+                },
+              ],
+            },
+          },
+          right: {
+            stack: {
+              id: Routes.RightMenuView,
+              children: [
+                {
+                  component: {
+                    name: Routes.RideHistoryScreen,
+                  },
+                },
+              ],
+            },
+          },
         },
       },
     });
