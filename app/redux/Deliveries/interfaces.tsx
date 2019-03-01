@@ -1,3 +1,39 @@
+// ADDRESS LIST INTERFACES
+
+export interface IAddressItem {
+  id: string;
+  place_name: string;
+  relevance: number;
+  geometry: IAddressGeometry;
+  matching_place_name: string;
+  context: Array<IAdressContext>;
+}
+
+export interface IAdressContext {
+  id: string;
+  text: string;
+}
+
+export interface ICoordinates {
+  lat: number;
+  long: number;
+}
+
+export interface ISelectedAddress {
+  matchingPlaceName: string;
+  coordinates: ICoordinates;
+  postalCode: string;
+}
+
+export interface IAddress {
+  data: Array<IAddressItem>;
+  value: string;
+  selected: ISelectedAddress;
+  isAddressSelected: boolean;
+}
+
+// CALCULATED DIRECTIONS INTERFACES
+
 export interface IAddressGeometry {
   coordinates: Array<Array<number>>;
   type: string;
@@ -10,9 +46,6 @@ export interface ISteps {
   geometry: IAddressGeometry;
   mode: string;
   name: string;
-  // TODO: Before requiring see if following props are needed:
-  // intersections:
-  // maneuver
 }
 
 export interface IRoute {
@@ -30,7 +63,10 @@ export interface IWaypoint {
 
 export interface IDeliverySearchResult {
   uuid: string;
-  // first route is from, second is to route
+  // first route = from location.
+  // second route = to location.
   routes: Array<IRoute>;
   waypoints: Array<IWaypoint>;
+  fromAddress: ISelectedAddress;
+  toAddress: ISelectedAddress;
 }

@@ -1,30 +1,21 @@
 import React, { PureComponent } from 'react';
-import { EmitterSubscription, Keyboard } from 'react-native';
+import { EmitterSubscription, Keyboard, Alert } from 'react-native';
 import { client as MapboxClient } from '../../../config/MapboxClient';
 import FromToSearchView from './Views';
-import { IAddressGeometry } from '../../../scenes/DirectionsScreen';
+import {
+  IAddress,
+  IAddressItem,
+  ISelectedAddress,
+} from '../../../redux/Deliveries/interfaces';
+import { getPostalCodeFromMapBox } from '../../../utils/MapBoxUtils';
 
 type Props = {
   applySearchResults(
-    fromAddressCoordinates: Array<number>,
-    toAddressCoordinates: Array<number>,
+    fromAddress: ISelectedAddress,
+    toAddress: ISelectedAddress,
   ): void;
   isDirectionsDrawn: boolean;
 };
-
-export interface IAddressItem {
-  id: string;
-  place_name: string;
-  relevance: number;
-  geometry: IAddressGeometry;
-}
-
-export interface IAddress {
-  data: Array<IAddressItem>;
-  value: string;
-  selectedCoordinates: Array<number>;
-  isAddressSelected: boolean;
-}
 
 type State = {
   currentSelection: string;
@@ -34,29 +25,45 @@ type State = {
   addressListIsOpen: boolean;
 };
 
+const INITIAL_STATE = {
+  currentSelection: '',
+  fromAddress: {
+    data: [],
+    value: '',
+    selected: {
+      matchingPlaceName: '',
+      coordinates: {
+        lat: 0,
+        long: 0,
+      },
+      postalCode: '',
+    },
+    isAddressSelected: false,
+  },
+  toAddress: {
+    data: [],
+    value: '',
+    selected: {
+      matchingPlaceName: '',
+      coordinates: {
+        lat: 0,
+        long: 0,
+      },
+      postalCode: '',
+    },
+    isAddressSelected: false,
+  },
+  isKeyboardVisible: false,
+  addressListIsOpen: false,
+};
+
 class FromToSearch extends PureComponent<Props, State> {
   private keyboardWillShowListener: EmitterSubscription | any;
   private keyboardWillHideListener: EmitterSubscription | any;
 
   constructor(props: Readonly<Props>) {
     super(props);
-    this.state = {
-      currentSelection: '',
-      fromAddress: {
-        data: [],
-        value: '',
-        selectedCoordinates: [],
-        isAddressSelected: false,
-      },
-      toAddress: {
-        data: [],
-        value: '',
-        selectedCoordinates: [],
-        isAddressSelected: false,
-      },
-      isKeyboardVisible: false,
-      addressListIsOpen: false,
-    };
+    this.state = INITIAL_STATE;
     this.searchForAddress = this.searchForAddress.bind(this);
     this.onFocusToAddressField = this.onFocusToAddressField.bind(this);
     this.onFocusFromAddressField = this.onFocusFromAddressField.bind(this);
@@ -68,23 +75,7 @@ class FromToSearch extends PureComponent<Props, State> {
   componentWillReceiveProps(props: any) {
     // Handles re-setting state to initial state.
     if (props.isDirectionsDrawn === false) {
-      this.setState({
-        currentSelection: '',
-        fromAddress: {
-          data: [],
-          value: '',
-          selectedCoordinates: [],
-          isAddressSelected: false,
-        },
-        toAddress: {
-          data: [],
-          value: '',
-          selectedCoordinates: [],
-          isAddressSelected: false,
-        },
-        isKeyboardVisible: false,
-        addressListIsOpen: false,
-      });
+      this.setState(INITIAL_STATE);
     }
     return null;
   }
@@ -152,14 +143,28 @@ class FromToSearch extends PureComponent<Props, State> {
     const {
       place_name,
       geometry: { coordinates },
+      matching_place_name: matchingPlaceName,
+      context,
     } = item;
     const { currentSelection } = this.state;
+    const lat = coordinates[1];
+    const long = coordinates[0];
+
+    // TODO: handle error if getPostalCodeFromMapBox(context) fails
+    const postalCode = getPostalCodeFromMapBox(context);
+    if (!postalCode) {
+      return Alert.alert('Postal Code Error', 'Please verify address.');
+    }
     // @ts-ignore TODO: research why interpolation is not work with type screen
     await this.setState({
       [currentSelection]: {
         data: this.state[currentSelection].data,
         value: place_name,
-        selectedCoordinates: coordinates,
+        selected: {
+          matchingPlaceName,
+          coordinates: { lat, long },
+          postalCode,
+        },
         isAddressSelected: true,
       },
       currentSelection: '',
@@ -171,8 +176,8 @@ class FromToSearch extends PureComponent<Props, State> {
     ) {
       Keyboard.dismiss();
       this.props.applySearchResults(
-        this.state.fromAddress.selectedCoordinates,
-        this.state.toAddress.selectedCoordinates,
+        this.state.fromAddress.selected,
+        this.state.toAddress.selected,
       );
     }
   }

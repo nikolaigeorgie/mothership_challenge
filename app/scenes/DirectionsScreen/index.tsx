@@ -7,7 +7,10 @@ import {
   mapBoxBoundFormatter,
 } from '../../utils/MapBoxUtils';
 import { addDelivery } from '../../redux/Deliveries/actions';
-import { IDeliverySearchResult } from '../../redux/Deliveries/interfaces';
+import {
+  IDeliverySearchResult,
+  ISelectedAddress,
+} from '../../redux/Deliveries/interfaces';
 import Routes from '../../navigation/Routes';
 
 type Props = {
@@ -27,7 +30,6 @@ class DirectionsScreen extends PureComponent<Props, State> {
     super(props);
     this.state = {
       isDirectionsDrawn: false,
-      // @ts-ignore No initial value seems necessary to set
       // @ts-ignore No initial value seems necessary to set
       searchAddresses: {},
     };
@@ -66,18 +68,24 @@ class DirectionsScreen extends PureComponent<Props, State> {
   }
 
   async applySearchResults(
-    fromAddressCoordinates: Array<number>,
-    toAddressCoordinates: Array<number>,
+    fromAddress: ISelectedAddress,
+    toAddress: ISelectedAddress,
   ) {
+    const fromAddressCoordinates = [
+      fromAddress.coordinates.long,
+      fromAddress.coordinates.lat,
+    ];
+    const toAddressCoordinates = [
+      toAddress.coordinates.long,
+      toAddress.coordinates.lat,
+    ];
+
     try {
-      const searchAddresses = await getMapDirections(
-        fromAddressCoordinates,
-        toAddressCoordinates,
-      );
+      const searchAddresses = await getMapDirections(fromAddress, toAddress);
 
       await this.setState({
+        searchAddresses: { ...searchAddresses, fromAddress, toAddress },
         isDirectionsDrawn: true,
-        searchAddresses,
       });
 
       await this.mapView.fitBounds(
@@ -94,7 +102,7 @@ class DirectionsScreen extends PureComponent<Props, State> {
       component: {
         name: Routes.QuoteScreen,
         passProps: {
-          // TODO: Pass in necessary data for quote creation
+          searchedAddress: this.state.searchAddresses,
         },
       },
     });

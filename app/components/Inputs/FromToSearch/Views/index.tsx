@@ -3,9 +3,12 @@ import { LayoutAnimation, View, Animated } from 'react-native';
 import StandardInput from '../../../Inputs/StandardInput';
 import { springAnimation } from '../../../../utils/LayoutAnimations';
 import styles from './styles';
-import { IAddress, IAddressItem } from '../index';
 import AddressesList from '../../../Lists/AddressesList';
 import FromToLine from '../../../Views/FromToLine';
+import {
+  IAddress,
+  IAddressItem,
+} from '../../../../redux/Deliveries/interfaces';
 
 type Props = {
   addressListIsOpen: boolean;

@@ -9,7 +9,11 @@ import MapboxGL from '@mapbox/react-native-mapbox-gl';
 import { lineString as makeLineString } from '@turf/helpers';
 import StandardNavBar from '../../../components/NavBars/StandardNavBar';
 import FromToSearch from '../../../components/Inputs/FromToSearch';
-import { IWaypoint, IRoute } from '../../../redux/Deliveries/interfaces';
+import {
+  IWaypoint,
+  IRoute,
+  ISelectedAddress,
+} from '../../../redux/Deliveries/interfaces';
 import { Images } from '../../../themes';
 import styles from './styles';
 import mapStyles from './mapStyles';
@@ -21,8 +25,8 @@ type Props = {
   navRightButtonOnPress(): void;
   navLeftButtonOnPress(): void;
   applySearchResults(
-    fromAddressCoordinates: Array<number>,
-    toAddressCoordinates: Array<number>,
+    fromAddress: ISelectedAddress,
+    toAddress: ISelectedAddress,
   ): void;
   isDirectionsDrawn: boolean;
   routes: Array<IRoute>;

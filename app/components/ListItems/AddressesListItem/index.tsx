@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import AddressesListItemView from './Views';
-import { IAddressItem } from '../../Inputs/FromToSearch';
+import { IAddressItem } from '../../../redux/Deliveries/interfaces';
 
 type Props = {
   item: IAddressItem;

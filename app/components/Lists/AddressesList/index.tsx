@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import AddressesListItem from '../../ListItems/AddressesListItem';
-import { IAddressItem } from '../../Inputs/FromToSearch';
 import AddressesListView from './Views';
+import { IAddressItem } from '../../../redux/Deliveries/interfaces';
 
 export interface IAddressCell {
   item: IAddressItem;
