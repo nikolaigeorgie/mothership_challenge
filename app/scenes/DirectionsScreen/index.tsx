@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Navigation } from 'react-native-navigation';
 import DirectionsScreenView from './Views';
 import { getMapDirections } from '../../utils/MapBoxUtils';
 import { addDelivery } from '../../redux/Deliveries/actions';
 import { IDeliverySearchResult } from '../../redux/Deliveries/interfaces';
+import Routes from '../../navigation/Routes';
 
 type Props = {
   componentId: string;
@@ -40,7 +42,13 @@ class DirectionsScreen extends PureComponent<Props, State> {
   }
 
   navRightButtonOnPress() {
-    // TODO: Handle right nav button interaction
+    Navigation.mergeOptions(Routes.RightMenuView, {
+      sideMenu: {
+        right: {
+          visible: true,
+        },
+      },
+    });
   }
 
   navLeftButtonOnPress() {
