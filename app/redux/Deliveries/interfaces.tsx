@@ -5,7 +5,7 @@ export interface IAddressItem {
   place_name: string;
   relevance: number;
   geometry: IAddressGeometry;
-  matching_place_name: string;
+  place_name: string;
   context: Array<IAdressContext>;
 }
 
@@ -20,7 +20,7 @@ export interface ICoordinates {
 }
 
 export interface ISelectedAddress {
-  matchingPlaceName: string;
+  placeName: string;
   coordinates: ICoordinates;
   postalCode: string;
 }

@@ -30,6 +30,8 @@ type Props = {
   determineIfNextDisabled: boolean;
   createQuoteOnPress(): void;
   loading: boolean;
+  fromAddressTitle: string;
+  toAddressTitle: string;
 };
 
 class QuoteScreenView extends PureComponent<Props> {
@@ -55,13 +57,13 @@ class QuoteScreenView extends PureComponent<Props> {
             <View style={styles.sections}>
               <ClearEntryInput
                 width={INPUT_WIDTH}
-                value="4780 Poe Avenue"
+                value={this.props.fromAddressTitle}
                 headerTitle="From"
                 isDisabled
               />
               <ClearEntryInput
                 width={INPUT_WIDTH}
-                value="4780 Poe Avenue"
+                value={this.props.toAddressTitle}
                 headerTitle="To"
                 isDisabled
               />

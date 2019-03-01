@@ -31,7 +31,7 @@ const INITIAL_STATE = {
     data: [],
     value: '',
     selected: {
-      matchingPlaceName: '',
+      placeName: '',
       coordinates: {
         lat: 0,
         long: 0,
@@ -44,7 +44,7 @@ const INITIAL_STATE = {
     data: [],
     value: '',
     selected: {
-      matchingPlaceName: '',
+      placeName: '',
       coordinates: {
         lat: 0,
         long: 0,
@@ -143,7 +143,7 @@ class FromToSearch extends PureComponent<Props, State> {
     const {
       place_name,
       geometry: { coordinates },
-      matching_place_name: matchingPlaceName,
+      place_name: placeName,
       context,
     } = item;
     const { currentSelection } = this.state;
@@ -161,7 +161,7 @@ class FromToSearch extends PureComponent<Props, State> {
         data: this.state[currentSelection].data,
         value: place_name,
         selected: {
-          matchingPlaceName,
+          placeName,
           coordinates: { lat, long },
           postalCode,
         },

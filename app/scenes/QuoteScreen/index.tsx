@@ -3,9 +3,11 @@ import { Navigation } from 'react-native-navigation';
 import QuoteScreenView from './Views';
 import { createQuoteForDelivery } from '../../redux/Deliveries/actions';
 import Routes from '../../navigation/Routes';
+import { IDeliverySearchResult } from '../../redux/Deliveries/interfaces';
 
 type Props = {
   componentId: string;
+  searchedAddress: IDeliverySearchResult;
 };
 
 type State = {
@@ -94,6 +96,8 @@ class QuoteScreen extends PureComponent<Props, State> {
         determineIfNextDisabled={this.determineIfNextDisabled()}
         createQuoteOnPress={this.createQuoteOnPress}
         loading={this.state.loading}
+        fromAddressTitle={this.props.searchedAddress.fromAddress.placeName}
+        toAddressTitle={this.props.searchedAddress.toAddress.placeName}
       />
     );
   }
