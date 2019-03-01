@@ -13,9 +13,11 @@ import { IWaypoint, IRoute } from '../../../redux/Deliveries/interfaces';
 import { Images } from '../../../themes';
 import styles from './styles';
 import mapStyles from './mapStyles';
+import MaterialButton from '../../../components/Buttons/MaterialButton';
 
-interface Props {
+type Props = {
   componentId: string;
+  nextButtonOnPress(): void;
   navRightButtonOnPress(): void;
   navLeftButtonOnPress(): void;
   applySearchResults(
@@ -26,7 +28,7 @@ interface Props {
   routes: Array<IRoute>;
   registerMapRef(ref: any): void;
   waypoints: Array<IWaypoint>;
-}
+};
 
 class DirectionsScreenView extends PureComponent<Props> {
   renderFromPoint() {
@@ -116,6 +118,14 @@ class DirectionsScreenView extends PureComponent<Props> {
             {this.renderToPoint()}
           </MapboxGL.MapView>
         </View>
+        {this.props.isDirectionsDrawn && (
+          <View style={styles.nextButtonContainer}>
+            <MaterialButton
+              onPress={this.props.nextButtonOnPress}
+              text="Next"
+            />
+          </View>
+        )}
       </SafeAreaView>
     );
   }

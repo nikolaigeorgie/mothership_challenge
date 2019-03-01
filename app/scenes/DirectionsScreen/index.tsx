@@ -31,6 +31,7 @@ class DirectionsScreen extends PureComponent<Props, State> {
     this.applySearchResults = this.applySearchResults.bind(this);
     this.clearDrawnDirections = this.clearDrawnDirections.bind(this);
     this.registerMapRef = this.registerMapRef.bind(this);
+    this.nextButtonOnPress = this.nextButtonOnPress.bind(this);
     this.mapView = null;
   }
 
@@ -80,6 +81,10 @@ class DirectionsScreen extends PureComponent<Props, State> {
     }
   }
 
+  nextButtonOnPress() {
+    // TODO: Navigate to new screen to show summary
+  }
+
   render() {
     return (
       <DirectionsScreenView
@@ -91,6 +96,7 @@ class DirectionsScreen extends PureComponent<Props, State> {
         routes={this.state.searchAddresses.routes}
         registerMapRef={this.registerMapRef}
         waypoints={this.state.searchAddresses.waypoints}
+        nextButtonOnPress={this.nextButtonOnPress}
       />
     );
   }
