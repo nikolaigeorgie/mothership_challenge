@@ -153,7 +153,6 @@ class FromToSearch extends PureComponent<Props, State> {
       place_name,
       geometry: { coordinates },
     } = item;
-    Keyboard.dismiss();
     const { currentSelection } = this.state;
     // @ts-ignore TODO: research why interpolation is not work with type screen
     await this.setState({
@@ -170,6 +169,7 @@ class FromToSearch extends PureComponent<Props, State> {
       this.state.fromAddress.isAddressSelected &&
       this.state.toAddress.isAddressSelected
     ) {
+      Keyboard.dismiss();
       this.props.applySearchResults(
         this.state.fromAddress.selectedCoordinates,
         this.state.toAddress.selectedCoordinates,
