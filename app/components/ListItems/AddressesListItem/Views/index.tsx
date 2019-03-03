@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
-import { IAddressItem } from '../../../Inputs/FromToSearch';
+import {IAddressItem} from "../../../../redux/Deliveries/interfaces";
 
 type Props = {
   item: IAddressItem;
@@ -10,10 +10,9 @@ type Props = {
 
 class AddressesListItemView extends PureComponent<Props> {
   render() {
-    // TODO: If have time add image
     return (
       <TouchableOpacity style={styles.container} onPress={this.props.onPress}>
-        <Text>{this.props.item.place_name}</Text>
+        <Text style={styles.text}>{this.props.item.place_name}</Text>
       </TouchableOpacity>
     );
   }

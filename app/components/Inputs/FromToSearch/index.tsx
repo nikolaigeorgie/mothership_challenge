@@ -141,7 +141,10 @@ class FromToSearch extends PureComponent<Props, State> {
         [currentSelection]: { ...this.state[currentSelection], data },
       });
     } catch (err) {
-      // TODO: handle report error
+      return Alert.alert(
+        'Something went wrong',
+        'Please try searching again',
+      );
     }
   }
 
@@ -155,11 +158,19 @@ class FromToSearch extends PureComponent<Props, State> {
     const lat = coordinates[1];
     const long = coordinates[0];
 
-    // TODO: handle error if getPostalCodeFromMapBox(context) fails
-
     const { street, neighborhood, state, postalCode } = mapAddressFormatter(
       item,
     );
+
+    if (
+      this.state.fromAddress.value === place_name ||
+      this.state.toAddress.value === place_name
+    ) {
+      return Alert.alert(
+        'No Same Addresses',
+        'Please change on of the addresses',
+      );
+    }
 
     // @ts-ignore TODO: research why interpolation is not work with type screen
     await this.setState({

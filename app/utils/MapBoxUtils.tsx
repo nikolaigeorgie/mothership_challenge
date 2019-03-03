@@ -1,10 +1,6 @@
 import { client } from '../config/MapboxClient';
 import { Scaled } from '../themes';
-import {
-  IAddressItem,
-  IRates,
-  ISelectedAddress,
-} from '../redux/Deliveries/interfaces';
+import { IAddressItem, ISelectedAddress } from '../redux/Deliveries/interfaces';
 
 export const getMapDirections = async (
   fromAddress: ISelectedAddress,
