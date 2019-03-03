@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import StackedNavBar from '../../../components/NavBars/StackedNavBar';
 import { Images, Scaled } from '../../../themes';
@@ -6,8 +6,12 @@ import ClearEntryInput from '../../../components/Inputs/ClearEntryInput';
 import styles from './styles';
 import MaterialButton from '../../../components/Buttons/MaterialButton';
 import DimensionsInput from '../../../components/Inputs/DimensionsInput';
+import SnapCarousal from '../../../components/Lists/SnapCarousal';
+import { getFirstRate } from '../../../utils/MapBoxUtils';
+import { IRates } from '../../../redux/Deliveries/interfaces';
 
 type Props = {
+  rates: IRates;
   checkoutOnPress(): void;
   popToRoot(): void;
   fromAddressTitle: string;
@@ -22,6 +26,7 @@ type Props = {
       height: string;
     };
   };
+  renderSnapCarousalItem(item: { item: any; index: number }): ReactNode;
 };
 
 const INPUT_WIDTH = Scaled.screen.width * 0.36;
@@ -78,6 +83,12 @@ class SummaryScreenView extends PureComponent<Props> {
             isDisabled
           />
         </View>
+        <SnapCarousal
+          // Get first rate is for demonstration purposes
+          data={getFirstRate(this.props.rates)}
+          renderItem={this.props.renderSnapCarousalItem}
+          height={Scaled.screen.height * 0.3}
+        />
         <MaterialButton onPress={this.props.checkoutOnPress} text="Checkout" />
       </SafeAreaView>
     );

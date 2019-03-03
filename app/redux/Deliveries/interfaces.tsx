@@ -88,11 +88,13 @@ interface IDedicatedRate {
   bestValue: IRateShape;
   flatbed: IRateShape;
   reefer: IRateShape;
+  lowest: IRateShape;
+  fastest: IRateShape;
 }
 
 export interface IRates {
   // Only accounting for one type of rate for testing.
   dedicated: IDedicatedRate;
-  // standard is optional
-  // guaranteed is optional
+  standard: IDedicatedRate;
+  guaranteed: IDedicatedRate;
 }

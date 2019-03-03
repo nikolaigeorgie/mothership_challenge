@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Alert } from 'react-native';
+import { Alert, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import SummaryScreenView from './Views';
 import {
   IDeliverySearchResult,
   IRates,
 } from '../../redux/Deliveries/interfaces';
+import RateListItem from '../../components/ListItems/RateListItem';
 
 type Props = {
   componentId: string;
@@ -29,6 +30,7 @@ class SummaryScreen extends PureComponent<Props> {
     this.state = {};
     this.popToRoot = this.popToRoot.bind(this);
     this.checkoutOnPress = this.checkoutOnPress.bind(this);
+    this.renderSnapCarousalItem = this.renderSnapCarousalItem.bind(this);
   }
 
   popToRoot() {
@@ -46,6 +48,10 @@ class SummaryScreen extends PureComponent<Props> {
     );
   }
 
+  renderSnapCarousalItem(item: { item: any }) {
+    return <RateListItem item={item.item} />;
+  }
+
   render() {
     return (
       <SummaryScreenView
@@ -54,6 +60,8 @@ class SummaryScreen extends PureComponent<Props> {
         fromAddressTitle={this.props.searchedAddress.fromAddress.placeName}
         toAddressTitle={this.props.searchedAddress.toAddress.placeName}
         shipmentData={this.props.shipmentData}
+        renderSnapCarousalItem={this.renderSnapCarousalItem}
+        rates={this.props.rates}
       />
     );
   }

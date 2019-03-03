@@ -1,6 +1,10 @@
 import { client } from '../config/MapboxClient';
 import { Scaled } from '../themes';
-import { IAddressItem, ISelectedAddress } from '../redux/Deliveries/interfaces';
+import {
+  IAddressItem,
+  IRates,
+  ISelectedAddress,
+} from '../redux/Deliveries/interfaces';
 
 export const getMapDirections = async (
   fromAddress: ISelectedAddress,
@@ -59,4 +63,16 @@ export const mapAddressFormatter = (item: IAddressItem) => {
     state: region[0].short_code.substr(3),
     postalCode: postalArray[0].text,
   };
+};
+
+export const getFirstRate = (rates: IRates) => {
+  if (rates.dedicated) {
+    return [rates.dedicated.bestValue];
+  } else if (rates.standard) {
+    const { fastest, lowest } = rates.standard;
+    return [fastest, lowest];
+  } else {
+    const { bestValue } = rates.guaranteed;
+    return [bestValue];
+  }
 };
