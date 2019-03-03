@@ -38,9 +38,6 @@ export function startApp() {
       topBar: {
         visible: false,
       },
-      layout: {
-        backgroundColor: Colors.white,
-      },
     });
 
     Navigation.setRoot({

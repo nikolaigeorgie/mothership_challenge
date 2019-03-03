@@ -1,4 +1,4 @@
-import React, { Key, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import { Navigation } from 'react-native-navigation';
 import { Alert, Keyboard } from 'react-native';
 import QuoteScreenView from './Views';
@@ -6,6 +6,9 @@ import { createQuoteForDelivery } from '../../redux/Deliveries/actions';
 import Routes from '../../navigation/Routes';
 import { IDeliverySearchResult } from '../../redux/Deliveries/interfaces';
 import { verifyInputData } from '../../utils/QuoteUtils';
+import StandardPicker, {
+  IPickerItem,
+} from '../../components/Pickers/StandardPicker';
 
 type Props = {
   componentId: string;
@@ -21,7 +24,7 @@ type State = {
     height: string;
   };
   quantityValue: string;
-  typeValuesArray: Array<string>;
+  typeValuesArray: Array<IPickerItem>;
   loading: boolean;
 };
 
@@ -37,7 +40,11 @@ class QuoteScreen extends PureComponent<Props, State> {
         height: '',
       },
       quantityValue: '',
-      typeValuesArray: ['Pallet', 'Boxes', 'Loose Items'],
+      typeValuesArray: [
+        { label: 'Pallet', value: 'Pallet' },
+        { label: 'Boxes', value: 'Boxes' },
+        { label: 'Loose Items', value: 'Loose Items' },
+      ],
       loading: false,
     };
     this.toggleValueModal = this.toggleValueModal.bind(this);
@@ -46,10 +53,36 @@ class QuoteScreen extends PureComponent<Props, State> {
     this.onChangeQuantityText = this.onChangeQuantityText.bind(this);
     this.popBack = this.popBack.bind(this);
     this.createQuoteOnPress = this.createQuoteOnPress.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);
+  }
+
+  handleTypeChange(typeValue: string) {
+    this.setState({ typeValue });
   }
 
   toggleValueModal() {
     // TODO: Show overlay modal for chainging type
+    Navigation.showOverlay({
+      component: {
+        name: Routes.BottomPanel,
+        passProps: {
+          renderView: () => {
+            return (
+              <StandardPicker
+                selectedValue={this.state.typeValue}
+                data={this.state.typeValuesArray}
+                onValueChange={this.handleTypeChange}
+              />
+            );
+          },
+        },
+        options: {
+          overlay: {
+            interceptTouchOutside: false,
+          },
+        },
+      },
+    });
   }
   onChangeWeightText(weightValue: string) {
     this.setState({ weightValue });

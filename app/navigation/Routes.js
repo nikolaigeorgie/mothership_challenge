@@ -8,6 +8,7 @@ const Routes = {
   RideHistoryScreen: 'RideHistoryScreen',
   QuoteScreen: 'QuoteScreen',
   SummaryScreen: 'SummaryScreen',
+  BottomPanel: 'BottomPanel',
 };
 
 export default Routes;
