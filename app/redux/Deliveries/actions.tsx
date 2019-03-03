@@ -57,7 +57,6 @@ export const createQuoteForDelivery = async (
       },
       cargo: {
         'Ssnk3H1SGG9i5Q-E60fMq0tyov': {
-          // TODO: add dynamic width X height X length.
           width: parseInt(shipmentData.dimensions.width, 10),
           height: parseInt(shipmentData.dimensions.height, 10),
           length: parseInt(shipmentData.dimensions.length, 10),
