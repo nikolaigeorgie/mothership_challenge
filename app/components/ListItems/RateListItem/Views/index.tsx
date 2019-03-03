@@ -12,17 +12,13 @@ class RateListItemView extends PureComponent<Props> {
     return (
       <View style={styles.container}>
         <View style={styles.card}>
-          <Text>{this.props.item.serviceLevel}</Text>
-          <Text>{this.props.item.serviceType}</Text>
-          <Text>{this.props.item.price}</Text>
-          <Text>{this.props.item.days}</Text>
-          <Text>
-            {new Date(this.props.item.estimatedDeliveryDate).toLocaleString(
-              'en-US',
-            )}
+          <Text style={styles.serviceType}>
+            {this.props.item.serviceType.toUpperCase()}
           </Text>
-          <Text>
-            {new Date(this.props.item.estimatedPickupDate).toLocaleString(
+          {/*<Text>{this.props.item.days}</Text>*/}
+          <Text style={styles.price}>{`$${this.props.item.price}`}</Text>
+          <Text style={styles.deliveryDate}>
+            {new Date(this.props.item.estimatedDeliveryDate).toLocaleString(
               'en-US',
             )}
           </Text>

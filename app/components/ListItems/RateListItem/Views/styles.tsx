@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors, Scaled } from '../../../../themes';
+import { Colors } from '../../../../themes';
 
 export default StyleSheet.create({
   container: {
@@ -10,9 +10,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   card: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.blue,
     borderRadius: 10,
-    height: '90%',
+    height: '70%',
     width: '90%',
     shadowOpacity: 0.4,
     shadowRadius: 8,
@@ -20,5 +20,26 @@ export default StyleSheet.create({
       width: -3,
       height: 3,
     },
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  serviceType: {
+    color: Colors.white,
+    fontSize: 17,
+    fontWeight: 'bold',
+  },
+  deliveryDate: {
+    color: Colors.white,
+    fontSize: 15,
+    fontWeight: '500',
+  },
+  price: {
+    color: Colors.white,
+    fontSize: 15,
+    fontWeight: '500',
+  },
+  descriptionContainer: {
+    justifyContent: 'space-around',
+    height: '100%',
   },
 });

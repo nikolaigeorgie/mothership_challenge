@@ -21,7 +21,7 @@ class SnapCarousalView extends PureComponent<Props> {
           data={this.props.data}
           renderItem={this.props.renderItem}
           sliderWidth={Scaled.screen.width}
-          itemWidth={Scaled.screen.width * 0.7}
+          itemWidth={Scaled.screen.width * 0.8}
           contentContainerStyle={{
             alignItems: 'center',
             justifyContent: 'center',
