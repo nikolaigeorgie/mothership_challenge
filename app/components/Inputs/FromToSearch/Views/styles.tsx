@@ -13,9 +13,9 @@ export default StyleSheet.create({
   },
   searchContainer: {
     flex: 0.9,
-    height: '70%',
-    // Min height for smaller phones
+    height: '100%',
     minHeight: 100,
+    maxHeight: Scaled.screen.width * 0.3,
     justifyContent: 'space-around',
   },
   addressContainer: {

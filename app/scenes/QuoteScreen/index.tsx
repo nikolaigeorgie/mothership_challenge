@@ -108,11 +108,11 @@ class QuoteScreen extends PureComponent<Props, State> {
 
   determineIfNextDisabled() {
     // Return true of false based on state
-    return verifyInputData({
-      weightValue: this.state.weightValue,
-      dimensionValues: this.state.dimensionValues,
-      quantityValue: this.state.quantityValue,
-    });
+    return verifyInputData(
+      this.state.weightValue,
+      this.state.dimensionValues,
+      this.state.quantityValue,
+    );
   }
 
   async createQuoteOnPress() {
