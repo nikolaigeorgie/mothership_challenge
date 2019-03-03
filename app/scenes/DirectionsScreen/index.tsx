@@ -10,7 +10,7 @@ import {
   ISelectedAddress,
 } from '../../redux/Deliveries/interfaces';
 import Routes from '../../navigation/Routes';
-import {Alert} from "react-native";
+import { Alert, Keyboard } from 'react-native';
 
 type Props = {
   componentId: string;
@@ -34,7 +34,6 @@ class DirectionsScreen extends PureComponent<Props, State> {
     this.navRightButtonOnPress = this.navRightButtonOnPress.bind(this);
     this.navLeftButtonOnPress = this.navLeftButtonOnPress.bind(this);
     this.applySearchResults = this.applySearchResults.bind(this);
-    this.clearDrawnDirections = this.clearDrawnDirections.bind(this);
     this.registerMapRef = this.registerMapRef.bind(this);
     this.nextButtonOnPress = this.nextButtonOnPress.bind(this);
     this.mapView = null;
@@ -56,13 +55,10 @@ class DirectionsScreen extends PureComponent<Props, State> {
 
   navLeftButtonOnPress() {
     if (this.state.isDirectionsDrawn) {
+      Keyboard.dismiss();
       return this.setState({ isDirectionsDrawn: false });
     }
     // TODO: Handle left nav menu open
-  }
-
-  clearDrawnDirections() {
-    this.setState({ isDirectionsDrawn: false });
   }
 
   async applySearchResults(
@@ -90,10 +86,7 @@ class DirectionsScreen extends PureComponent<Props, State> {
         ...mapBoxBoundFormatter(fromAddressCoordinates, toAddressCoordinates),
       );
     } catch (err) {
-      return Alert.alert(
-          'Something went wrong',
-          'Please try searching again',
-      );
+      return Alert.alert('Something went wrong', 'Please try searching again');
     }
   }
 
