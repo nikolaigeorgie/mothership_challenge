@@ -8,7 +8,7 @@ import MaterialButton from '../../../components/Buttons/MaterialButton';
 import DimensionsInput from '../../../components/Inputs/DimensionsInput';
 import SnapCarousal from '../../../components/Lists/SnapCarousal';
 import { getFirstRate } from '../../../utils/MapBoxUtils';
-import { IRates } from '../../../redux/Deliveries/interfaces';
+import { IRates, IShipmentData } from '../../../redux/Deliveries/interfaces';
 
 type Props = {
   rates: IRates;
@@ -16,16 +16,7 @@ type Props = {
   popToRoot(): void;
   fromAddressTitle: string;
   toAddressTitle: string;
-  shipmentData: {
-    quantity: string;
-    type: string;
-    weight: string;
-    dimensions: {
-      length: string;
-      width: string;
-      height: string;
-    };
-  };
+  shipmentData: IShipmentData;
   renderSnapCarousalItem(item: { item: any; index: number }): ReactNode;
 };
 

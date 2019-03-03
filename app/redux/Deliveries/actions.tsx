@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ADDED_ENTRY } from './types';
-import { IDeliverySearchResult } from './interfaces';
+import { IDeliverySearchResult, IShipmentData } from './interfaces';
 import ENDPOINTS from '../../utils/Endpoints';
 
 export const addDelivery = (payload: IDeliverySearchResult) => async (
@@ -11,16 +11,7 @@ export const addDelivery = (payload: IDeliverySearchResult) => async (
 
 export const createQuoteForDelivery = async (
   searchedAddress: IDeliverySearchResult,
-  shipmentData: {
-    quantity: string;
-    type: string;
-    weight: string;
-    dimensions: {
-      length: string;
-      width: string;
-      height: string;
-    };
-  },
+  shipmentData: IShipmentData,
 ) => {
   const data = {
     shipment: {

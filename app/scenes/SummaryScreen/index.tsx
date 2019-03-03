@@ -5,23 +5,18 @@ import SummaryScreenView from './Views';
 import {
   IDeliverySearchResult,
   IRates,
+  IShipmentData,
 } from '../../redux/Deliveries/interfaces';
 import RateListItem from '../../components/ListItems/RateListItem';
+import { addDelivery } from '../../redux/Deliveries/actions';
+import { connect } from 'react-redux';
 
 type Props = {
   componentId: string;
   rates: IRates;
   searchedAddress: IDeliverySearchResult;
-  shipmentData: {
-    quantity: string;
-    type: string;
-    weight: string;
-    dimensions: {
-      length: string;
-      width: string;
-      height: string;
-    };
-  };
+  shipmentData: IShipmentData;
+  addDelivery(entity: IDeliverySearchResult): void;
 };
 
 class SummaryScreen extends PureComponent<Props> {
@@ -38,11 +33,13 @@ class SummaryScreen extends PureComponent<Props> {
   }
 
   async checkoutOnPress() {
-    // TODO: Transition to create quote flow
-    // Showing error in meantime
+    const { searchedAddress } = this.props;
+    searchedAddress.rates = this.props.rates;
+    searchedAddress.shipmentData = this.props.shipmentData;
+    await this.props.addDelivery(searchedAddress);
     Alert.alert(
-      'Something went wrong',
-      'Please try again later.',
+      'Saved entry!',
+      'This delivery has been saved although not processed.',
       [{ text: 'OK', onPress: () => this.popToRoot() }],
       { cancelable: false },
     );
@@ -67,4 +64,14 @@ class SummaryScreen extends PureComponent<Props> {
   }
 }
 
-export default SummaryScreen;
+const mapDispatchToProps = (
+  dispatch: (arg0: (dispatch: any) => Promise<any>) => void,
+) => ({
+  addDelivery: (payload: IDeliverySearchResult) =>
+    dispatch(addDelivery(payload)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(SummaryScreen);

@@ -72,6 +72,8 @@ export interface IDeliverySearchResult {
   waypoints: Array<IWaypoint>;
   fromAddress: ISelectedAddress;
   toAddress: ISelectedAddress;
+  rates: IRates;
+  shipmentData: IShipmentData;
 }
 
 // RATES
@@ -97,4 +99,15 @@ export interface IRates {
   dedicated: IDedicatedRate;
   standard: IDedicatedRate;
   guaranteed: IDedicatedRate;
+}
+
+export interface IShipmentData {
+  quantity: string;
+  type: string;
+  weight: string;
+  dimensions: {
+    length: string;
+    width: string;
+    height: string;
+  };
 }

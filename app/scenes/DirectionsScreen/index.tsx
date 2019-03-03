@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 import DirectionsScreenView from './Views';
 import {
   getMapDirections,
   mapBoxBoundFormatter,
 } from '../../utils/MapBoxUtils';
-import { addDelivery } from '../../redux/Deliveries/actions';
 import {
   IDeliverySearchResult,
   ISelectedAddress,
@@ -15,7 +13,6 @@ import Routes from '../../navigation/Routes';
 
 type Props = {
   componentId: string;
-  addDelivery(entity: IDeliverySearchResult): void;
 };
 
 type State = {
@@ -91,7 +88,6 @@ class DirectionsScreen extends PureComponent<Props, State> {
       await this.mapView.fitBounds(
         ...mapBoxBoundFormatter(fromAddressCoordinates, toAddressCoordinates),
       );
-      await this.props.addDelivery(searchAddresses);
     } catch (err) {
       // TODO: handle error reporter
     }
@@ -125,14 +121,4 @@ class DirectionsScreen extends PureComponent<Props, State> {
   }
 }
 
-const mapDispatchToProps = (
-  dispatch: (arg0: (dispatch: any) => Promise<any>) => void,
-) => ({
-  addDelivery: (payload: IDeliverySearchResult) =>
-    dispatch(addDelivery(payload)),
-});
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(DirectionsScreen);
+export default DirectionsScreen;
