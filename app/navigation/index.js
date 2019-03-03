@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import Routes from './Routes';
 import { pagesMap } from './pagesMap';
 import configureStore from '../redux/store';
-import { Colors } from '../themes';
 
 export const store = configureStore();
 
@@ -27,12 +26,12 @@ export function registerScreen(pageMapItem) {
 }
 
 export function registerScreens() {
+  // Register every screen to make available
   pagesMap.map(pageItem => registerScreen(pageItem));
 }
 
 export function startApp() {
   registerScreens();
-
   Navigation.events().registerAppLaunchedListener(() => {
     Navigation.setDefaultOptions({
       topBar: {

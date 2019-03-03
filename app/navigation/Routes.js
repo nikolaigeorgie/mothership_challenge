@@ -8,6 +8,8 @@ const Routes = {
   RideHistoryScreen: 'RideHistoryScreen',
   QuoteScreen: 'QuoteScreen',
   SummaryScreen: 'SummaryScreen',
+
+  // MODALS
   BottomPanel: 'BottomPanel',
 };
 
