@@ -14,7 +14,11 @@ type Props = {
 type State = {
   typeValue: string;
   weightValue: string;
-  dimensionsValue: string;
+  dimensionValues: {
+    length: string;
+    width: string;
+    height: string;
+  };
   quantityValue: string;
   typeValuesArray: Array<string>;
   loading: boolean;
@@ -26,14 +30,18 @@ class QuoteScreen extends PureComponent<Props, State> {
     this.state = {
       typeValue: 'Pallet',
       weightValue: '',
-      dimensionsValue: '',
+      dimensionValues: {
+        length: '',
+        width: '',
+        height: '',
+      },
       quantityValue: '',
       typeValuesArray: ['Pallet', 'Boxes', 'Loose Items'],
       loading: false,
     };
     this.toggleValueModal = this.toggleValueModal.bind(this);
     this.onChangeWeightText = this.onChangeWeightText.bind(this);
-    this.onChangeDimensionsText = this.onChangeDimensionsText.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
     this.onChangeQuantityText = this.onChangeQuantityText.bind(this);
     this.popBack = this.popBack.bind(this);
     this.createQuoteOnPress = this.createQuoteOnPress.bind(this);
@@ -46,8 +54,15 @@ class QuoteScreen extends PureComponent<Props, State> {
     this.setState({ weightValue });
   }
 
-  onChangeDimensionsText(dimensionsValue: string) {
-    this.setState({ dimensionsValue });
+  updateDimensions(length: string, width: string, height: string) {
+    console.log('length', length);
+    this.setState({
+      dimensionValues: {
+        length,
+        width,
+        height,
+      },
+    });
   }
 
   onChangeQuantityText(quantityValue: string) {
@@ -72,7 +87,7 @@ class QuoteScreen extends PureComponent<Props, State> {
         quantity: this.state.quantityValue,
         weight: this.state.weightValue,
         type: this.state.typeValue,
-        dimensions: this.state.dimensionsValue,
+        dimensions: this.state.dimensionValues,
       };
 
       const rates = await createQuoteForDelivery(
@@ -102,11 +117,10 @@ class QuoteScreen extends PureComponent<Props, State> {
       <QuoteScreenView
         typeValue={this.state.typeValue}
         weightValue={this.state.weightValue}
-        dimensionsValue={this.state.dimensionsValue}
         quantityValue={this.state.quantityValue}
         toggleValueModal={this.toggleValueModal}
         onChangeWeightText={this.onChangeWeightText}
-        onChangeDimensionsText={this.onChangeDimensionsText}
+        updateDimensions={this.updateDimensions}
         onChangeQuantityText={this.onChangeQuantityText}
         popBack={this.popBack}
         determineIfNextDisabled={this.determineIfNextDisabled()}

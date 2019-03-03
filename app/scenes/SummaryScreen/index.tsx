@@ -15,7 +15,11 @@ type Props = {
     quantity: string;
     type: string;
     weight: string;
-    dimensions: string;
+    dimensions: {
+      length: string;
+      width: string;
+      height: string;
+    };
   };
 };
 

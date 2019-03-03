@@ -14,6 +14,7 @@ import { Images, Scaled } from '../../../themes';
 import ClearEntryInput from '../../../components/Inputs/ClearEntryInput';
 import styles from './styles';
 import MaterialButton from '../../../components/Buttons/MaterialButton';
+import DimensionsInput from '../../../components/Inputs/DimensionsInput';
 
 const INPUT_WIDTH = Scaled.screen.width * 0.36;
 
@@ -22,8 +23,7 @@ type Props = {
   toggleValueModal(): void;
   weightValue: string;
   onChangeWeightText(text: string): void;
-  dimensionsValue: string;
-  onChangeDimensionsText(text: string): void;
+  updateDimensions(length: string, width: string, height: string): void;
   quantityValue: string;
   onChangeQuantityText(text: string): void;
   popBack(): void;
@@ -97,19 +97,24 @@ class QuoteScreenView extends PureComponent<Props> {
               />
             </View>
             <View style={styles.sections}>
-              <ClearEntryInput
+              {/*<ClearEntryInput*/}
+              {/*width={INPUT_WIDTH}*/}
+              {/*placeholder="L X W X H in."*/}
+              {/*value={this.props.dimensionsValue}*/}
+              {/*onChangeText={this.props.onChangeDimensionsText}*/}
+              {/*headerTitle="Dimensions"*/}
+              {/*rightComponent={*/}
+              {/*this.props.dimensionsValue.length > 0 && (*/}
+              {/*<Text style={styles.rightText}>in.</Text>*/}
+              {/*)*/}
+              {/*}*/}
+              {/*keyboardType="numeric"*/}
+              {/*maxLength={12}*/}
+              {/*/>*/}
+
+              <DimensionsInput
+                updateDimensions={this.props.updateDimensions}
                 width={INPUT_WIDTH}
-                placeholder="L X W X H in."
-                value={this.props.dimensionsValue}
-                onChangeText={this.props.onChangeDimensionsText}
-                headerTitle="Dimensions"
-                rightComponent={
-                  this.props.dimensionsValue.length > 0 && (
-                    <Text style={styles.rightText}>in.</Text>
-                  )
-                }
-                keyboardType="numeric"
-                maxLength={12}
               />
               <ClearEntryInput
                 width={INPUT_WIDTH}

@@ -5,6 +5,7 @@ import { Images, Scaled } from '../../../themes';
 import ClearEntryInput from '../../../components/Inputs/ClearEntryInput';
 import styles from './styles';
 import MaterialButton from '../../../components/Buttons/MaterialButton';
+import DimensionsInput from '../../../components/Inputs/DimensionsInput';
 
 type Props = {
   checkoutOnPress(): void;
@@ -15,7 +16,11 @@ type Props = {
     quantity: string;
     type: string;
     weight: string;
-    dimensions: string;
+    dimensions: {
+      length: string;
+      width: string;
+      height: string;
+    };
   };
 };
 
@@ -60,12 +65,12 @@ class SummaryScreenView extends PureComponent<Props> {
           />
         </View>
         <View style={styles.sections}>
-          <ClearEntryInput
+          <DimensionsInput
             width={INPUT_WIDTH}
-            value={this.props.shipmentData.dimensions}
-            headerTitle="Dimensions"
             isDisabled
+            dimensions={this.props.shipmentData.dimensions}
           />
+
           <ClearEntryInput
             width={INPUT_WIDTH}
             headerTitle="Quantity"
