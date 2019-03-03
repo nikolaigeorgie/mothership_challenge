@@ -13,7 +13,10 @@ export default StyleSheet.create({
     height: Scaled.screen.height * 0.1,
   },
   headerTitle: {
-    fontSize: 15,
+    fontSize: Scaled.fontSizes.h7,
     fontWeight: '500',
+  },
+  textInput: {
+    fontSize: Scaled.fontSizes.h8,
   },
 });

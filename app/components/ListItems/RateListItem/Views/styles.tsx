@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../../themes';
+import { Colors, Scaled } from '../../../../themes';
 
 export default StyleSheet.create({
   container: {
@@ -25,18 +25,18 @@ export default StyleSheet.create({
   },
   serviceType: {
     color: Colors.white,
-    fontSize: 17,
+    fontSize: Scaled.fontSizes.h6,
     fontWeight: 'bold',
   },
   deliveryDate: {
     color: Colors.white,
-    fontSize: 15,
+    fontSize: Scaled.fontSizes.h8,
     fontWeight: '500',
   },
   price: {
     color: Colors.white,
-    fontSize: 15,
-    fontWeight: '500',
+    fontSize: Scaled.fontSizes.h7,
+    fontWeight: 'bold',
   },
   descriptionContainer: {
     justifyContent: 'space-around',

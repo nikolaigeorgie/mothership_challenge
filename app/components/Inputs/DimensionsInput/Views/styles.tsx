@@ -12,14 +12,18 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
   headerTitle: {
-    fontSize: 15,
+    fontSize: Scaled.fontSizes.h7,
     fontWeight: '500',
   },
   textField: {
     width: '25%',
     textAlign: 'center',
+    fontSize: Scaled.fontSizes.h8,
+  },
+  text: {
+    fontSize: Scaled.fontSizes.h8,
   },
 });

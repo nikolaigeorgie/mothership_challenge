@@ -26,7 +26,7 @@ class ClearEntryInputView extends PureComponent<Props> {
             placeholder={this.props.placeholder}
             placeholderTextColor={Colors.grey}
             value={this.props.value}
-            style={{ width: this.props.textFieldWidth }}
+            style={[{ width: this.props.textFieldWidth }, styles.textInput]}
             autoCorrect={false}
             // @ts-ignore makes no sense. TODO: Investigate type error
             keyboardType={this.props.keyboardType}

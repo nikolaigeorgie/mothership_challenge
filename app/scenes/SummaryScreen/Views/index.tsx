@@ -20,8 +20,6 @@ type Props = {
   renderSnapCarousalItem(item: { item: any; index: number }): ReactNode;
 };
 
-const INPUT_WIDTH = Scaled.screen.width * 0.36;
-
 class SummaryScreenView extends PureComponent<Props> {
   render() {
     return (
@@ -34,13 +32,13 @@ class SummaryScreenView extends PureComponent<Props> {
         />
         <View style={styles.sections}>
           <ClearEntryInput
-            width={INPUT_WIDTH}
+            width={Scaled.halfScreenInputWidth}
             value={this.props.fromAddressTitle}
             headerTitle="From"
             isDisabled
           />
           <ClearEntryInput
-            width={INPUT_WIDTH}
+            width={Scaled.halfScreenInputWidth}
             value={this.props.toAddressTitle}
             headerTitle="To"
             isDisabled
@@ -48,13 +46,13 @@ class SummaryScreenView extends PureComponent<Props> {
         </View>
         <View style={styles.sections}>
           <ClearEntryInput
-            width={INPUT_WIDTH}
+            width={Scaled.halfScreenInputWidth}
             value={this.props.shipmentData.type}
             headerTitle="Type"
             isDisabled
           />
           <ClearEntryInput
-            width={INPUT_WIDTH}
+            width={Scaled.halfScreenInputWidth}
             headerTitle="Weight"
             value={this.props.shipmentData.weight}
             isDisabled
@@ -62,13 +60,13 @@ class SummaryScreenView extends PureComponent<Props> {
         </View>
         <View style={styles.sections}>
           <DimensionsInput
-            width={INPUT_WIDTH}
+            width={Scaled.halfScreenInputWidth}
             isDisabled
             dimensions={this.props.shipmentData.dimensions}
           />
 
           <ClearEntryInput
-            width={INPUT_WIDTH}
+            width={Scaled.halfScreenInputWidth}
             headerTitle="Quantity"
             value={this.props.shipmentData.quantity}
             isDisabled

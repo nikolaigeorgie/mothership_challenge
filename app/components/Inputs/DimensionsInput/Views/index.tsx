@@ -32,7 +32,7 @@ class DimensionsInputView extends PureComponent<Props> {
             maxLength={3}
             pointerEvents={this.props.isDisabled ? 'none' : 'auto'}
           />
-          <Text style={{ color: this.props.color }}>X</Text>
+          <Text style={[{ color: this.props.color }, styles.text]}>X</Text>
           <TextInput
             placeholder="W"
             placeholderTextColor={Colors.grey}
@@ -44,7 +44,7 @@ class DimensionsInputView extends PureComponent<Props> {
             maxLength={3}
             pointerEvents={this.props.isDisabled ? 'none' : 'auto'}
           />
-          <Text style={{ color: this.props.color }}>X</Text>
+          <Text style={[{ color: this.props.color }, styles.text]}>X</Text>
           <TextInput
             placeholder="H"
             placeholderTextColor={Colors.grey}
@@ -56,7 +56,7 @@ class DimensionsInputView extends PureComponent<Props> {
             maxLength={3}
             pointerEvents={this.props.isDisabled ? 'none' : 'auto'}
           />
-          <Text style={{ color: this.props.color }}>in.</Text>
+          <Text style={[{ color: this.props.color }, styles.text]}>in.</Text>
         </View>
       </View>
     );

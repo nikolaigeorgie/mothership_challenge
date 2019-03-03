@@ -37,8 +37,6 @@ type Props = {
   };
 };
 
-const INPUT_WIDTH = Scaled.screen.width * 0.36;
-
 class QuoteScreenView extends PureComponent<Props> {
   render() {
     const { height } = Scaled.screen;
@@ -61,13 +59,13 @@ class QuoteScreenView extends PureComponent<Props> {
             />
             <View style={styles.sections}>
               <ClearEntryInput
-                width={INPUT_WIDTH}
+                width={Scaled.halfScreenInputWidth}
                 value={this.props.fromAddressTitle}
                 headerTitle="From"
                 isDisabled
               />
               <ClearEntryInput
-                width={INPUT_WIDTH}
+                width={Scaled.halfScreenInputWidth}
                 value={this.props.toAddressTitle}
                 headerTitle="To"
                 isDisabled
@@ -77,7 +75,7 @@ class QuoteScreenView extends PureComponent<Props> {
             <View style={styles.sections}>
               <TouchableOpacity onPress={this.props.toggleValueModal}>
                 <ClearEntryInput
-                  width={INPUT_WIDTH}
+                  width={Scaled.halfScreenInputWidth}
                   value={this.props.typeValue}
                   headerTitle="Type"
                   rightComponent={
@@ -87,7 +85,7 @@ class QuoteScreenView extends PureComponent<Props> {
                 />
               </TouchableOpacity>
               <ClearEntryInput
-                width={INPUT_WIDTH}
+                width={Scaled.halfScreenInputWidth}
                 placeholder="0 lbs each"
                 value={this.props.weightValue}
                 onChangeText={this.props.onChangeWeightText}
@@ -104,7 +102,7 @@ class QuoteScreenView extends PureComponent<Props> {
             <View style={styles.sections}>
               <DimensionsInput
                 updateDimensions={this.props.updateDimensions}
-                width={INPUT_WIDTH}
+                width={Scaled.halfScreenInputWidth}
                 color={
                   this.props.dimensionValues.length.length > 0
                     ? Colors.black
@@ -112,7 +110,7 @@ class QuoteScreenView extends PureComponent<Props> {
                 }
               />
               <ClearEntryInput
-                width={INPUT_WIDTH}
+                width={Scaled.halfScreenInputWidth}
                 placeholder="0"
                 value={this.props.quantityValue}
                 onChangeText={this.props.onChangeQuantityText}

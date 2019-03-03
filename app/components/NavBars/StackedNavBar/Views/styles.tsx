@@ -8,6 +8,7 @@ export default StyleSheet.create({
     marginTop: Scaled.navBarOffset,
     flexDirection: 'row',
     height: Scaled.screen.height * 0.1,
+    maxHeight: 70,
   },
   leftImage: {
     height: Scaled.screen.width * 0.07,
@@ -15,8 +16,7 @@ export default StyleSheet.create({
   },
   title: {
     fontWeight: '700',
-    // TODO: Make fonts scaled
-    fontSize: 20,
+    fontSize: Scaled.fontSizes.h5,
   },
   separator: {
     height: 2,

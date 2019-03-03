@@ -11,7 +11,7 @@ export default StyleSheet.create({
   title: {
     color: Colors.grey,
     // TODO: Make fonts scaled
-    fontSize: 16,
+    fontSize: Scaled.fontSizes.h8,
     fontWeight: '700',
   },
   message: {

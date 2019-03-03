@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import DimensionsInputView from './Views';
+import { Colors } from '../../../themes';
 
 type Props = {
   width: string | number;
@@ -29,6 +30,7 @@ class DimensionsInput extends PureComponent<Props, State> {
       width: '',
       height: '',
     },
+    color: Colors.black,
   };
 
   constructor(props: Readonly<Props>) {

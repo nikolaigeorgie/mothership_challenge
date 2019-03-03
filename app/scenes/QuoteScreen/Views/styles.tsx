@@ -6,7 +6,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-around',
-    height: Scaled.screen.height * 0.15,
+    height: Scaled.screen.width * 0.25,
   },
   downImage: {
     height: Scaled.screen.width * 0.04,
@@ -18,5 +18,6 @@ export default StyleSheet.create({
   },
   rightText: {
     left: Scaled.screen.width * 0.02,
+    fontSize: Scaled.fontSizes.h8,
   },
 });

@@ -19,7 +19,7 @@ class StandardNavBarView extends PureComponent<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <View style={[styles.toolBar, { marginTop: Scaled.navBarOffset }]}>
+        <View style={styles.toolBar}>
           <View style={styles.leftContainer}>
             <TouchableOpacity onPress={this.props.leftButtonOnPress}>
               <Image source={this.props.leftImage} style={styles.leftImage} />

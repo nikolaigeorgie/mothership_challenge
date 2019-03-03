@@ -11,8 +11,7 @@ export default StyleSheet.create({
   },
   text: {
     color: Colors.black,
-    // TODO: Make fonts scaled
-    fontSize: 21,
+    fontSize: Scaled.fontSizes.h6,
     fontWeight: '500',
   },
 });
