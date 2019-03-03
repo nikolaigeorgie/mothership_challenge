@@ -64,15 +64,3 @@ export const mapAddressFormatter = (item: IAddressItem) => {
     postalCode: postalArray[0].text,
   };
 };
-
-export const getFirstRate = (rates: IRates) => {
-  if (rates.dedicated) {
-    return [rates.dedicated.bestValue];
-  } else if (rates.standard) {
-    const { fastest, lowest } = rates.standard;
-    return [fastest, lowest];
-  } else {
-    const { bestValue } = rates.guaranteed;
-    return [bestValue];
-  }
-};

@@ -7,7 +7,7 @@ import styles from './styles';
 import MaterialButton from '../../../components/Buttons/MaterialButton';
 import DimensionsInput from '../../../components/Inputs/DimensionsInput';
 import SnapCarousal from '../../../components/Lists/SnapCarousal';
-import { getFirstRate } from '../../../utils/MapBoxUtils';
+import { getFirstRate } from '../../../utils/QuoteUtils';
 import { IRates, IShipmentData } from '../../../redux/Deliveries/interfaces';
 
 type Props = {
