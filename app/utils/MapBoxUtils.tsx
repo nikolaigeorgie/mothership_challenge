@@ -1,9 +1,6 @@
 import { client } from '../config/MapboxClient';
 import { Scaled } from '../themes';
-import {
-  IAdressContext,
-  ISelectedAddress,
-} from '../redux/Deliveries/interfaces';
+import { IAddressItem, ISelectedAddress } from '../redux/Deliveries/interfaces';
 
 export const getMapDirections = async (
   fromAddress: ISelectedAddress,
@@ -48,12 +45,21 @@ export const mapBoxBoundFormatter = (
   ];
 };
 
-export const getPostalCodeFromMapBox = (context: Array<IAdressContext>) => {
-  const postalCode = context.filter((item: IAdressContext) =>
-    item.id.includes('postcode'),
-  );
-  if (postalCode.length > 0 && postalCode[0] && postalCode[0].text) {
-    return postalCode[0].text;
-  }
-  return null;
+export const mapAddressFormatter = (item: IAddressItem) => {
+  // TODO: Do major testing to see if cases fail.
+  const locationArray = item.place_name.split(',');
+
+  const street = locationArray[0];
+  const neighborhood = locationArray[1].substr(1);
+
+  const region = item.context.filter(item => item.id.includes('region'));
+  const postalArray = item.context.filter(item => item.id.includes('postcode'));
+
+  return {
+    street,
+    neighborhood,
+
+    state: region[0].short_code.substr(3),
+    postalCode: postalArray[0].text,
+  };
 };

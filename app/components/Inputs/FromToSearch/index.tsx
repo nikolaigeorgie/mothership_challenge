@@ -7,7 +7,7 @@ import {
   IAddressItem,
   ISelectedAddress,
 } from '../../../redux/Deliveries/interfaces';
-import { getPostalCodeFromMapBox } from '../../../utils/MapBoxUtils';
+import { mapAddressFormatter } from '../../../utils/MapBoxUtils';
 
 type Props = {
   applySearchResults(
@@ -36,6 +36,9 @@ const INITIAL_STATE = {
         lat: 0,
         long: 0,
       },
+      street: '',
+      neighborhood: '',
+      state: '',
       postalCode: '',
     },
     isAddressSelected: false,
@@ -49,6 +52,9 @@ const INITIAL_STATE = {
         lat: 0,
         long: 0,
       },
+      street: '',
+      neighborhood: '',
+      state: '',
       postalCode: '',
     },
     isAddressSelected: false,
@@ -144,17 +150,17 @@ class FromToSearch extends PureComponent<Props, State> {
       place_name,
       geometry: { coordinates },
       place_name: placeName,
-      context,
     } = item;
     const { currentSelection } = this.state;
     const lat = coordinates[1];
     const long = coordinates[0];
 
     // TODO: handle error if getPostalCodeFromMapBox(context) fails
-    const postalCode = getPostalCodeFromMapBox(context);
-    if (!postalCode) {
-      return Alert.alert('Postal Code Error', 'Please verify address.');
-    }
+
+    const { street, neighborhood, state, postalCode } = mapAddressFormatter(
+      item,
+    );
+
     // @ts-ignore TODO: research why interpolation is not work with type screen
     await this.setState({
       [currentSelection]: {
@@ -163,6 +169,9 @@ class FromToSearch extends PureComponent<Props, State> {
         selected: {
           placeName,
           coordinates: { lat, long },
+          street,
+          neighborhood,
+          state,
           postalCode,
         },
         isAddressSelected: true,

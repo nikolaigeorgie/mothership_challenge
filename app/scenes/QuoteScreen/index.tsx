@@ -4,6 +4,7 @@ import QuoteScreenView from './Views';
 import { createQuoteForDelivery } from '../../redux/Deliveries/actions';
 import Routes from '../../navigation/Routes';
 import { IDeliverySearchResult } from '../../redux/Deliveries/interfaces';
+import { Alert } from 'react-native';
 
 type Props = {
   componentId: string;
@@ -66,7 +67,8 @@ class QuoteScreen extends PureComponent<Props, State> {
     // TODO: create quote here
     this.setState({ loading: true });
     try {
-      await createQuoteForDelivery();
+      await createQuoteForDelivery(this.props.searchedAddress);
+
       Navigation.push(this.props.componentId, {
         component: {
           name: Routes.SummaryScreen,
@@ -77,6 +79,8 @@ class QuoteScreen extends PureComponent<Props, State> {
       });
     } catch (err) {
       // TODO: Handle error report
+      console.log(err);
+      Alert.alert('Invalid Delivery Route', 'This route is not supported');
     }
     this.setState({ loading: false });
   }

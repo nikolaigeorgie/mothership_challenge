@@ -9,28 +9,54 @@ export const addDelivery = (payload: IDeliverySearchResult) => async (
   return dispatch({ type: ADDED_ENTRY, payload });
 };
 
-export const createQuoteForDelivery = async () => {
+export const createQuoteForDelivery = async (
+  searchedAddress: IDeliverySearchResult,
+) => {
+  console.log(searchedAddress);
   const data = {
     shipment: {
       pickupLocation: {
-        zip: '91364',
-        coordinates: { latitude: 34.1572064, longitude: -118.5764926 },
+        name: '',
+        phoneNumber: '',
+        email: '',
+        accessorials: {},
+        street: searchedAddress.fromAddress.street,
+        city: searchedAddress.fromAddress.neighborhood,
+        state: searchedAddress.fromAddress.state,
+        zip: searchedAddress.fromAddress.postalCode,
+        coordinates: {
+          latitude: searchedAddress.fromAddress.coordinates.lat,
+          longitude: searchedAddress.fromAddress.coordinates.long,
+        },
+        neighborhood: null,
       },
       deliveryLocation: {
-        zip: '90037',
-        coordinates: { latitude: 33.999056, longitude: -118.282272 },
+        name: '',
+        phoneNumber: '',
+        email: '',
+        accessorials: {},
+        street: searchedAddress.toAddress.street,
+        city: searchedAddress.toAddress.neighborhood,
+        state: searchedAddress.toAddress.state,
+        zip: searchedAddress.toAddress.postalCode,
+        coordinates: {
+          latitude: searchedAddress.toAddress.coordinates.lat,
+          longitude: searchedAddress.toAddress.coordinates.long,
+        },
+        neighborhood: null,
       },
       cargo: {
-        ZivODprV7LLDwn84AF4vqEf1fV: {
+        'Ssnk3H1SGG9i5Q-E60fMq0tyov': {
           width: 3,
           height: 3,
           length: 3,
-          weight: 33,
-          quantity: 333,
+          weight: 3,
+          quantity: 3,
           type: 'Pallet',
+          description: '',
         },
       },
-      pickupDate: '2019-03-01T12:45:00-08:00',
+      pickupDate: '2019-03-01T15:30:00-08:00',
     },
     promotionCode: null,
   };

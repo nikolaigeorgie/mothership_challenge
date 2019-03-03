@@ -5,13 +5,13 @@ export interface IAddressItem {
   place_name: string;
   relevance: number;
   geometry: IAddressGeometry;
-  place_name: string;
-  context: Array<IAdressContext>;
+  context: Array<IAddressContext>;
 }
 
-export interface IAdressContext {
+export interface IAddressContext {
   id: string;
   text: string;
+  short_code: string;
 }
 
 export interface ICoordinates {
@@ -23,6 +23,9 @@ export interface ISelectedAddress {
   placeName: string;
   coordinates: ICoordinates;
   postalCode: string;
+  street: string;
+  neighborhood: string;
+  state: string;
 }
 
 export interface IAddress {
