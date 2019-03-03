@@ -6,7 +6,6 @@ export default StyleSheet.create({
     borderBottomColor: Colors.blue,
     borderBottomWidth: 1,
     height: Scaled.screen.height * 0.1,
-    // TODO: add same width for text fields.
   },
   textFieldContainers: {
     flexDirection: 'row',

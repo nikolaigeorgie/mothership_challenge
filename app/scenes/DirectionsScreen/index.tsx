@@ -10,6 +10,7 @@ import {
   ISelectedAddress,
 } from '../../redux/Deliveries/interfaces';
 import Routes from '../../navigation/Routes';
+import {Alert} from "react-native";
 
 type Props = {
   componentId: string;
@@ -89,7 +90,10 @@ class DirectionsScreen extends PureComponent<Props, State> {
         ...mapBoxBoundFormatter(fromAddressCoordinates, toAddressCoordinates),
       );
     } catch (err) {
-      // TODO: handle error reporter
+      return Alert.alert(
+          'Something went wrong',
+          'Please try searching again',
+      );
     }
   }
 

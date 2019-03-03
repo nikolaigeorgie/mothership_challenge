@@ -22,7 +22,6 @@ export default StyleSheet.create({
   entryItem: {},
   title: {
     fontWeight: '700',
-    // TODO:
     fontSize: 14,
   },
 });

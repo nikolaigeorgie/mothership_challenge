@@ -61,7 +61,6 @@ class QuoteScreen extends PureComponent<Props, State> {
   }
 
   toggleValueModal() {
-    // TODO: Show overlay modal for chainging type
     Navigation.showOverlay({
       component: {
         name: Routes.BottomPanel,
