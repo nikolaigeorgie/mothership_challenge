@@ -19,9 +19,12 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     paddingLeft: Scaled.screen.width * 0.05,
   },
-  entryItem: {},
   title: {
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: Scaled.fontSizes.h10,
+  },
+  description: {
+    fontWeight: '600',
+    fontSize: Scaled.fontSizes.h10,
   },
 });

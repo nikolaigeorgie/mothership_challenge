@@ -9,18 +9,16 @@ type Props = {
 
 class DeliveryHistoryListItemView extends PureComponent<Props> {
   render() {
-    const { waypoints } = this.props.item;
-    const fromTitle = waypoints[0].name;
-    const toTitle = waypoints[1].name;
+    const { fromAddress, toAddress } = this.props.item;
     return (
       <View style={styles.container}>
-        <View style={styles.entryItem}>
+        <View>
           <Text style={styles.title}>FROM</Text>
-          <Text>{fromTitle}</Text>
+          <Text style={styles.description}>{fromAddress.street}</Text>
         </View>
-        <View style={styles.entryItem}>
+        <View>
           <Text style={styles.title}>TO</Text>
-          <Text>{toTitle}</Text>
+          <Text style={styles.description}>{toAddress.street}</Text>
         </View>
       </View>
     );
