@@ -12,6 +12,7 @@ type Props = {
   heightDimensionValue: string;
   onChangeHeightDimensionText(text: string): void;
   isDisabled: boolean;
+  color: string;
 };
 
 class DimensionsInputView extends PureComponent<Props> {
@@ -31,7 +32,7 @@ class DimensionsInputView extends PureComponent<Props> {
             maxLength={3}
             pointerEvents={this.props.isDisabled ? 'none' : 'auto'}
           />
-          <Text>X</Text>
+          <Text style={{ color: this.props.color }}>X</Text>
           <TextInput
             placeholder="W"
             placeholderTextColor={Colors.grey}
@@ -43,7 +44,7 @@ class DimensionsInputView extends PureComponent<Props> {
             maxLength={3}
             pointerEvents={this.props.isDisabled ? 'none' : 'auto'}
           />
-          <Text>X</Text>
+          <Text style={{ color: this.props.color }}>X</Text>
           <TextInput
             placeholder="H"
             placeholderTextColor={Colors.grey}
@@ -55,7 +56,7 @@ class DimensionsInputView extends PureComponent<Props> {
             maxLength={3}
             pointerEvents={this.props.isDisabled ? 'none' : 'auto'}
           />
-          <Text>in.</Text>
+          <Text style={{ color: this.props.color }}>in.</Text>
         </View>
       </View>
     );

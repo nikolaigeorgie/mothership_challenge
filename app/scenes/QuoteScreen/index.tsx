@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Key, PureComponent } from 'react';
 import { Navigation } from 'react-native-navigation';
-import { Alert } from 'react-native';
+import { Alert, Keyboard } from 'react-native';
 import QuoteScreenView from './Views';
 import { createQuoteForDelivery } from '../../redux/Deliveries/actions';
 import Routes from '../../navigation/Routes';
 import { IDeliverySearchResult } from '../../redux/Deliveries/interfaces';
+import { verifyInputData } from '../../utils/QuoteUtils';
 
 type Props = {
   componentId: string;
@@ -55,7 +56,6 @@ class QuoteScreen extends PureComponent<Props, State> {
   }
 
   updateDimensions(length: string, width: string, height: string) {
-    console.log('length', length);
     this.setState({
       dimensionValues: {
         length,
@@ -74,15 +74,18 @@ class QuoteScreen extends PureComponent<Props, State> {
   }
 
   determineIfNextDisabled() {
-    // TODO: Add cases for disabling button
-    return false;
+    // Return true of false based on state
+    return verifyInputData({
+      weightValue: this.state.weightValue,
+      dimensionValues: this.state.dimensionValues,
+      quantityValue: this.state.quantityValue,
+    });
   }
 
   async createQuoteOnPress() {
-    // TODO: create quote here
+    Keyboard.dismiss();
     this.setState({ loading: true });
     try {
-      // TODO: add dynamic width X height X length.
       const shipmentData = {
         quantity: this.state.quantityValue,
         weight: this.state.weightValue,
@@ -106,8 +109,10 @@ class QuoteScreen extends PureComponent<Props, State> {
         },
       });
     } catch (err) {
-      // TODO: Handle error report
-      Alert.alert('Invalid Delivery Route', 'This route is not supported');
+      Alert.alert(
+        'Something went wrong.',
+        'Please verify your input and address',
+      );
     }
     this.setState({ loading: false });
   }
@@ -128,6 +133,7 @@ class QuoteScreen extends PureComponent<Props, State> {
         loading={this.state.loading}
         fromAddressTitle={this.props.searchedAddress.fromAddress.placeName}
         toAddressTitle={this.props.searchedAddress.toAddress.placeName}
+        dimensionValues={this.state.dimensionValues}
       />
     );
   }

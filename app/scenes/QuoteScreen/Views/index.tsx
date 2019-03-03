@@ -10,13 +10,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import StackedNavBar from '../../../components/NavBars/StackedNavBar';
-import { Images, Scaled } from '../../../themes';
+import { Colors, Images, Scaled } from '../../../themes';
 import ClearEntryInput from '../../../components/Inputs/ClearEntryInput';
 import styles from './styles';
 import MaterialButton from '../../../components/Buttons/MaterialButton';
 import DimensionsInput from '../../../components/Inputs/DimensionsInput';
-
-const INPUT_WIDTH = Scaled.screen.width * 0.36;
 
 type Props = {
   typeValue: string;
@@ -32,7 +30,14 @@ type Props = {
   loading: boolean;
   fromAddressTitle: string;
   toAddressTitle: string;
+  dimensionValues: {
+    length: string;
+    width: string;
+    height: string;
+  };
 };
+
+const INPUT_WIDTH = Scaled.screen.width * 0.36;
 
 class QuoteScreenView extends PureComponent<Props> {
   render() {
@@ -97,24 +102,14 @@ class QuoteScreenView extends PureComponent<Props> {
               />
             </View>
             <View style={styles.sections}>
-              {/*<ClearEntryInput*/}
-              {/*width={INPUT_WIDTH}*/}
-              {/*placeholder="L X W X H in."*/}
-              {/*value={this.props.dimensionsValue}*/}
-              {/*onChangeText={this.props.onChangeDimensionsText}*/}
-              {/*headerTitle="Dimensions"*/}
-              {/*rightComponent={*/}
-              {/*this.props.dimensionsValue.length > 0 && (*/}
-              {/*<Text style={styles.rightText}>in.</Text>*/}
-              {/*)*/}
-              {/*}*/}
-              {/*keyboardType="numeric"*/}
-              {/*maxLength={12}*/}
-              {/*/>*/}
-
               <DimensionsInput
                 updateDimensions={this.props.updateDimensions}
                 width={INPUT_WIDTH}
+                color={
+                  this.props.dimensionValues.length.length > 0
+                    ? Colors.black
+                    : Colors.grey
+                }
               />
               <ClearEntryInput
                 width={INPUT_WIDTH}

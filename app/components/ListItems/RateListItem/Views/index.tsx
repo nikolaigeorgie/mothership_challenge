@@ -15,7 +15,6 @@ class RateListItemView extends PureComponent<Props> {
           <Text style={styles.serviceType}>
             {this.props.item.serviceType.toUpperCase()}
           </Text>
-          {/*<Text>{this.props.item.days}</Text>*/}
           <Text style={styles.price}>{`$${this.props.item.price}`}</Text>
           <Text style={styles.deliveryDate}>
             {new Date(this.props.item.estimatedDeliveryDate).toLocaleString(

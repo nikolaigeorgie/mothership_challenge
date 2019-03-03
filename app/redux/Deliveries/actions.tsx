@@ -22,7 +22,6 @@ export const createQuoteForDelivery = async (
     };
   },
 ) => {
-  console.log(shipmentData);
   const data = {
     shipment: {
       pickupLocation: {

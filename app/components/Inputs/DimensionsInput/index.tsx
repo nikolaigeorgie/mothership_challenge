@@ -10,6 +10,7 @@ type Props = {
     height: string;
   };
   isDisabled: boolean;
+  color: string;
 };
 
 type State = {
@@ -69,17 +70,11 @@ class DimensionsInput extends PureComponent<Props, State> {
       widthDimensionValue,
       heightDimensionValue,
     } = this.state;
-    if (
-      lengthDimensionValue.length > 0 &&
-      widthDimensionValue.length > 0 &&
-      heightDimensionValue.length > 0
-    ) {
-      this.props.updateDimensions(
-        lengthDimensionValue,
-        widthDimensionValue,
-        heightDimensionValue,
-      );
-    }
+    this.props.updateDimensions(
+      lengthDimensionValue,
+      widthDimensionValue,
+      heightDimensionValue,
+    );
   }
 
   render() {
@@ -93,6 +88,7 @@ class DimensionsInput extends PureComponent<Props, State> {
         onChangeWidthDimensionText={this.onChangeWidthDimensionText}
         onChangeHeightDimensionText={this.onChangeHeightDimensionText}
         isDisabled={this.props.isDisabled}
+        color={this.props.color}
       />
     );
   }
