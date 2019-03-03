@@ -73,3 +73,26 @@ export interface IDeliverySearchResult {
   fromAddress: ISelectedAddress;
   toAddress: ISelectedAddress;
 }
+
+// RATES
+export interface IRateShape {
+  days: number;
+  estimatedDeliveryDate: string;
+  estimatedPickupDate: string;
+  price: number;
+  serviceLevel: string;
+  serviceType: string;
+}
+
+interface IDedicatedRate {
+  bestValue: IRateShape;
+  flatbed: IRateShape;
+  reefer: IRateShape;
+}
+
+export interface IRates {
+  // Only accounting for one type of rate for testing.
+  dedicated: IDedicatedRate;
+  // standard is optional
+  // guaranteed is optional
+}

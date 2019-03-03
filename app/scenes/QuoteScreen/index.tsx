@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Navigation } from 'react-native-navigation';
+import { Alert } from 'react-native';
 import QuoteScreenView from './Views';
 import { createQuoteForDelivery } from '../../redux/Deliveries/actions';
 import Routes from '../../navigation/Routes';
 import { IDeliverySearchResult } from '../../redux/Deliveries/interfaces';
-import { Alert } from 'react-native';
 
 type Props = {
   componentId: string;
@@ -67,19 +67,31 @@ class QuoteScreen extends PureComponent<Props, State> {
     // TODO: create quote here
     this.setState({ loading: true });
     try {
-      await createQuoteForDelivery(this.props.searchedAddress);
+      // TODO: add dynamic width X height X length.
+      const shipmentData = {
+        quantity: this.state.quantityValue,
+        weight: this.state.weightValue,
+        type: this.state.typeValue,
+        dimensions: this.state.dimensionsValue,
+      };
+
+      const rates = await createQuoteForDelivery(
+        this.props.searchedAddress,
+        shipmentData,
+      );
 
       Navigation.push(this.props.componentId, {
         component: {
           name: Routes.SummaryScreen,
           passProps: {
-            // TODO: navigate
+            rates,
+            searchedAddress: this.props.searchedAddress,
+            shipmentData,
           },
         },
       });
     } catch (err) {
       // TODO: Handle error report
-      console.log(err);
       Alert.alert('Invalid Delivery Route', 'This route is not supported');
     }
     this.setState({ loading: false });

@@ -2,27 +2,27 @@ import React, { PureComponent } from 'react';
 import { Alert } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import SummaryScreenView from './Views';
+import {
+  IDeliverySearchResult,
+  IRates,
+} from '../../redux/Deliveries/interfaces';
 
 type Props = {
   componentId: string;
+  rates: IRates;
+  searchedAddress: IDeliverySearchResult;
+  shipmentData: {
+    quantity: string;
+    type: string;
+    weight: string;
+    dimensions: string;
+  };
 };
 
-type State = {
-  typeValue: string;
-  weightValue: string;
-  dimensionsValue: string;
-  quantityValue: string;
-};
-
-class SummaryScreen extends PureComponent<Props, State> {
+class SummaryScreen extends PureComponent<Props> {
   constructor(props: Readonly<Props>) {
     super(props);
-    this.state = {
-      typeValue: 'Pallet',
-      weightValue: '',
-      dimensionsValue: '',
-      quantityValue: '',
-    };
+    this.state = {};
     this.popToRoot = this.popToRoot.bind(this);
     this.checkoutOnPress = this.checkoutOnPress.bind(this);
   }
@@ -45,12 +45,11 @@ class SummaryScreen extends PureComponent<Props, State> {
   render() {
     return (
       <SummaryScreenView
-        typeValue={this.state.typeValue}
-        weightValue={this.state.weightValue}
-        dimensionsValue={this.state.dimensionsValue}
-        quantityValue={this.state.quantityValue}
         popToRoot={this.popToRoot}
         checkoutOnPress={this.checkoutOnPress}
+        fromAddressTitle={this.props.searchedAddress.fromAddress.placeName}
+        toAddressTitle={this.props.searchedAddress.toAddress.placeName}
+        shipmentData={this.props.shipmentData}
       />
     );
   }

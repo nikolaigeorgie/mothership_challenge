@@ -48,17 +48,14 @@ export const mapBoxBoundFormatter = (
 export const mapAddressFormatter = (item: IAddressItem) => {
   // TODO: Do major testing to see if cases fail.
   const locationArray = item.place_name.split(',');
-
   const street = locationArray[0];
   const neighborhood = locationArray[1].substr(1);
-
   const region = item.context.filter(item => item.id.includes('region'));
   const postalArray = item.context.filter(item => item.id.includes('postcode'));
 
   return {
     street,
     neighborhood,
-
     state: region[0].short_code.substr(3),
     postalCode: postalArray[0].text,
   };

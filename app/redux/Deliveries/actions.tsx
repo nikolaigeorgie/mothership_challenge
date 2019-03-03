@@ -11,8 +11,14 @@ export const addDelivery = (payload: IDeliverySearchResult) => async (
 
 export const createQuoteForDelivery = async (
   searchedAddress: IDeliverySearchResult,
+  shipmentData: {
+    quantity: string;
+    type: string;
+    weight: string;
+    dimensions: string;
+  },
 ) => {
-  console.log(searchedAddress);
+  console.log(shipmentData);
   const data = {
     shipment: {
       pickupLocation: {
@@ -47,12 +53,13 @@ export const createQuoteForDelivery = async (
       },
       cargo: {
         'Ssnk3H1SGG9i5Q-E60fMq0tyov': {
+          // TODO: add dynamic width X height X length.
           width: 3,
           height: 3,
           length: 3,
-          weight: 3,
-          quantity: 3,
-          type: 'Pallet',
+          weight: parseInt(shipmentData.weight, 10),
+          quantity: parseInt(shipmentData.quantity, 10),
+          type: shipmentData.type,
           description: '',
         },
       },
@@ -61,7 +68,10 @@ export const createQuoteForDelivery = async (
     promotionCode: null,
   };
 
-  const res = await axios.post(ENDPOINTS.quote, data);
-  // TODO: Handle response data
-  console.log('res', res);
+  const {
+    data: {
+      data: { rates },
+    },
+  } = await axios.post(ENDPOINTS.quote, data);
+  return rates;
 };

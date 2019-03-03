@@ -7,12 +7,16 @@ import styles from './styles';
 import MaterialButton from '../../../components/Buttons/MaterialButton';
 
 type Props = {
-  typeValue: string;
-  weightValue: string;
-  dimensionsValue: string;
-  quantityValue: string;
   checkoutOnPress(): void;
   popToRoot(): void;
+  fromAddressTitle: string;
+  toAddressTitle: string;
+  shipmentData: {
+    quantity: string;
+    type: string;
+    weight: string;
+    dimensions: string;
+  };
 };
 
 const INPUT_WIDTH = Scaled.screen.width * 0.36;
@@ -30,14 +34,42 @@ class SummaryScreenView extends PureComponent<Props> {
         <View style={styles.sections}>
           <ClearEntryInput
             width={INPUT_WIDTH}
-            value="4780 Poe Avenue"
+            value={this.props.fromAddressTitle}
             headerTitle="From"
             isDisabled
           />
           <ClearEntryInput
             width={INPUT_WIDTH}
-            value="4780 Poe Avenue"
+            value={this.props.toAddressTitle}
             headerTitle="To"
+            isDisabled
+          />
+        </View>
+        <View style={styles.sections}>
+          <ClearEntryInput
+            width={INPUT_WIDTH}
+            value={this.props.shipmentData.type}
+            headerTitle="Type"
+            isDisabled
+          />
+          <ClearEntryInput
+            width={INPUT_WIDTH}
+            headerTitle="Weight"
+            value={this.props.shipmentData.weight}
+            isDisabled
+          />
+        </View>
+        <View style={styles.sections}>
+          <ClearEntryInput
+            width={INPUT_WIDTH}
+            value={this.props.shipmentData.dimensions}
+            headerTitle="Dimensions"
+            isDisabled
+          />
+          <ClearEntryInput
+            width={INPUT_WIDTH}
+            headerTitle="Quantity"
+            value={this.props.shipmentData.quantity}
             isDisabled
           />
         </View>
