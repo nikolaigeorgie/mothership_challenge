@@ -10,11 +10,12 @@ This project is currently not compatiable with android.
 
 Mapbox will not work without adding corresponding key to app/config/keys.js `line 3`
 
-## TESTING
+## Testing
 
 Run `detox build --configuration ios.sim.debug` to generate a build.
 Run `detox test --configuration ios.sim.debug` to start the test.
 Tests are located in `e2e/` folder
+Make sure to disable Hardware Keyboard (Hardware -> Keyboard -> (uncheck) Connect Hardware Keyboard
 
 ## Structure:
 
