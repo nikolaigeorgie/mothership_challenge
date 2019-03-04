@@ -1,6 +1,6 @@
 # Mothership Challenge.
 
-React Native mobile application for Mothership.
+React Native mobile application using mapbox for Mothership.
 
 ## Setup
 
