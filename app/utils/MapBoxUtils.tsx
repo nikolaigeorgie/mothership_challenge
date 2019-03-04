@@ -29,9 +29,9 @@ export const mapBoxBoundFormatter = (
   const northEastCoordinates = fromAddressCoordinates;
   const southWestCoordinates = toAddressCoordinates;
   const topRightBottomLeft = [
-    0,
+    Scaled.screen.width * 0.3,
     Scaled.screen.width * 0.1,
-    Scaled.screen.height * 0.3,
+    Scaled.screen.height * 0.4,
     Scaled.screen.width * 0.1,
   ];
 
