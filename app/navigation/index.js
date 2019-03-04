@@ -42,6 +42,18 @@ export function startApp() {
     Navigation.setRoot({
       root: {
         sideMenu: {
+          left: {
+            stack: {
+              id: Routes.LeftMenuView,
+              children: [
+                {
+                  component: {
+                    name: Routes.MenuScreen,
+                  },
+                },
+              ],
+            },
+          },
           center: {
             stack: {
               id: Routes.CenterMenuView,

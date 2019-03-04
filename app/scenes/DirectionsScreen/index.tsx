@@ -58,7 +58,13 @@ class DirectionsScreen extends PureComponent<Props, State> {
       Keyboard.dismiss();
       return this.setState({ isDirectionsDrawn: false });
     }
-    // TODO: Handle left nav menu open
+    Navigation.mergeOptions(Routes.LeftMenuView, {
+      sideMenu: {
+        left: {
+          visible: true,
+        },
+      },
+    });
   }
 
   async applySearchResults(
