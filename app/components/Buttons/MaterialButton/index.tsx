@@ -9,7 +9,7 @@ type Props = {
   width: string | number;
   disabled: boolean;
   loading: boolean;
-  testID: string;
+  testID?: string;
 };
 
 class MaterialButton extends PureComponent<Props> {

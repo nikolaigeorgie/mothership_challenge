@@ -78,7 +78,11 @@ class SummaryScreenView extends PureComponent<Props> {
           renderItem={this.props.renderSnapCarousalItem}
           height={Scaled.screen.height * 0.3}
         />
-        <MaterialButton onPress={this.props.checkoutOnPress} text="Checkout" />
+        <MaterialButton
+          onPress={this.props.checkoutOnPress}
+          text="Checkout"
+          testID="checkoutButton"
+        />
       </SafeAreaView>
     );
   }

@@ -91,6 +91,7 @@ class QuoteScreenView extends PureComponent<Props> {
                 onChangeText={this.props.onChangeWeightText}
                 headerTitle="Weight"
                 maxLength={5}
+                testID="weightInput"
                 rightComponent={
                   this.props.weightValue.length > 0 && (
                     <Text style={styles.rightText}>lbs each</Text>
@@ -118,6 +119,7 @@ class QuoteScreenView extends PureComponent<Props> {
                 maxLength={4}
                 textFieldWidth="100%"
                 keyboardType="numeric"
+                testID="quantityInput"
               />
             </View>
             <MaterialButton
@@ -125,6 +127,7 @@ class QuoteScreenView extends PureComponent<Props> {
               text="Create Quote"
               disabled={this.props.determineIfNextDisabled}
               loading={this.props.loading}
+              testID="createQuoteButton"
             />
           </KeyboardAwareScrollView>
         </SafeAreaView>

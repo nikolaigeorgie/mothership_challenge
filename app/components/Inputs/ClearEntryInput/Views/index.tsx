@@ -14,6 +14,7 @@ type Props = {
   maxLength: number;
   textFieldWidth: number | string;
   keyboardType: string;
+  testID: string | undefined;
 };
 
 class ClearEntryInputView extends PureComponent<Props> {
@@ -26,6 +27,7 @@ class ClearEntryInputView extends PureComponent<Props> {
             placeholder={this.props.placeholder}
             placeholderTextColor={Colors.grey}
             value={this.props.value}
+            testID={this.props.testID}
             style={[{ width: this.props.textFieldWidth }, styles.textInput]}
             autoCorrect={false}
             // @ts-ignore makes no sense. TODO: Investigate type error

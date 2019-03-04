@@ -31,6 +31,7 @@ class DimensionsInputView extends PureComponent<Props> {
             onChangeText={this.props.onChangeLengthDimensionText}
             maxLength={3}
             pointerEvents={this.props.isDisabled ? 'none' : 'auto'}
+            testID="lengthInput"
           />
           <Text style={[{ color: this.props.color }, styles.text]}>X</Text>
           <TextInput
@@ -43,6 +44,7 @@ class DimensionsInputView extends PureComponent<Props> {
             onChangeText={this.props.onChangeWidthDimensionText}
             maxLength={3}
             pointerEvents={this.props.isDisabled ? 'none' : 'auto'}
+            testID="widthInput"
           />
           <Text style={[{ color: this.props.color }, styles.text]}>X</Text>
           <TextInput
@@ -55,6 +57,7 @@ class DimensionsInputView extends PureComponent<Props> {
             onChangeText={this.props.onChangeHeightDimensionText}
             maxLength={3}
             pointerEvents={this.props.isDisabled ? 'none' : 'auto'}
+            testID="heightInput"
           />
           <Text style={[{ color: this.props.color }, styles.text]}>in.</Text>
         </View>

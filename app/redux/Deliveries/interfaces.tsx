@@ -86,19 +86,20 @@ export interface IRateShape {
   serviceType: string;
 }
 
-interface IDedicatedRate {
+interface IRate {
   bestValue: IRateShape;
   flatbed: IRateShape;
   reefer: IRateShape;
   lowest: IRateShape;
   fastest: IRateShape;
+  nextDay: IRateShape;
 }
 
 export interface IRates {
   // Only accounting for one type of rate for testing.
-  dedicated: IDedicatedRate;
-  standard: IDedicatedRate;
-  guaranteed: IDedicatedRate;
+  dedicated: IRate;
+  standard: IRate;
+  guaranteed: IRate;
 }
 
 export interface IShipmentData {

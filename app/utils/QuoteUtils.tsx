@@ -1,5 +1,6 @@
 import {
-  IDeliverySearchResult, IRates,
+  IDeliverySearchResult,
+  IRates,
   IShipmentData,
 } from '../redux/Deliveries/interfaces';
 
@@ -75,10 +76,9 @@ export const formatQuoteDataForEndopintCall = (
   };
 };
 
-
 export const getFirstRate = (rates: IRates) => {
   if (rates.dedicated) {
-    return [rates.dedicated.bestValue];
+    return [rates.dedicated.nextDay];
   } else if (rates.standard) {
     const { fastest, lowest } = rates.standard;
     return [fastest, lowest];

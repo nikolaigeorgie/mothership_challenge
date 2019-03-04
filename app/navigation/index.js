@@ -32,13 +32,13 @@ export function registerScreens() {
 
 export function startApp() {
   registerScreens();
-  Navigation.setDefaultOptions({
-    topBar: {
-      visible: false,
-    },
-  });
 
   Navigation.events().registerAppLaunchedListener(() => {
+    Navigation.setDefaultOptions({
+      topBar: {
+        visible: false,
+      },
+    });
     Navigation.setRoot({
       root: {
         sideMenu: {
