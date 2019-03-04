@@ -183,7 +183,7 @@ class FromToSearch extends PureComponent<Props, State> {
     // @ts-ignore TODO: research why interpolation is not work with type screen
     await this.setState({
       [currentSelection]: {
-        ...this.state[currentSelection],
+        data: this.state[currentSelection].data,
         value: placeName,
         selected: {
           placeName,
@@ -215,7 +215,6 @@ class FromToSearch extends PureComponent<Props, State> {
   }
 
   createToAddressRef(ref: any) {
-    console.log('ref', ref);
     this.toAddressInputField = ref;
   }
 
