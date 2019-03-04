@@ -7,6 +7,7 @@ type Props = {
   value: string;
   onChangeText(text: string): void;
   onFocus(): void;
+  testID: string;
 };
 
 class StandardInput extends PureComponent<Props> {
@@ -22,6 +23,7 @@ class StandardInput extends PureComponent<Props> {
         onChangeText={this.props.onChangeText}
         onFocus={this.props.onFocus}
         value={this.props.value}
+        testID={this.props.testID}
       />
     );
   }

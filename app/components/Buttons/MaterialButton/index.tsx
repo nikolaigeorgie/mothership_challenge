@@ -9,6 +9,7 @@ type Props = {
   width: string | number;
   disabled: boolean;
   loading: boolean;
+  testID: string;
 };
 
 class MaterialButton extends PureComponent<Props> {
@@ -17,6 +18,7 @@ class MaterialButton extends PureComponent<Props> {
     backgroundColor: Colors.taxiYellow,
     disabled: false,
     loading: false,
+    testID: '',
   };
 
   render() {
@@ -28,6 +30,7 @@ class MaterialButton extends PureComponent<Props> {
         width={this.props.width}
         disabled={this.props.disabled}
         loading={this.props.loading}
+        testID={this.props.testID}
       />
     );
   }

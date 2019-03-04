@@ -9,6 +9,7 @@ type Props = {
   width: string | number;
   disabled: boolean;
   loading: boolean;
+  testID: string;
 };
 
 class MaterialButtonView extends PureComponent<Props> {
@@ -25,6 +26,7 @@ class MaterialButtonView extends PureComponent<Props> {
             opacity: this.props.disabled ? 0.3 : 1,
           },
         ]}
+        testID={this.props.testID}
       >
         {this.props.loading ? (
           <ActivityIndicator />

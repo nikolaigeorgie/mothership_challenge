@@ -37,12 +37,14 @@ class FromToSearchView extends PureComponent<Props> {
               onFocus={this.props.onFocusFromAddressField}
               placeholder="Pick-up from"
               value={this.props.fromAddress.value}
+              testID="pickUpFromInput"
             />
             <StandardInput
               onChangeText={this.props.searchForAddress}
               onFocus={this.props.onFocusToAddressField}
               placeholder="Deliver to"
               value={this.props.toAddress.value}
+              testID="deliverToInput"
             />
           </View>
         </View>

@@ -5,6 +5,7 @@ import { IAddressItem } from '../../../redux/Deliveries/interfaces';
 
 export interface IAddressCell {
   item: IAddressItem;
+  index: number;
 }
 
 type Props = {
@@ -22,9 +23,13 @@ class AddressesList extends PureComponent<Props> {
   }
 
   renderItem(cellItem: IAddressCell) {
-    const { item } = cellItem;
+    const { item, index } = cellItem;
     return (
-      <AddressesListItem item={item} onPress={this.props.onAddressSelection} />
+      <AddressesListItem
+        item={item}
+        index={index}
+        onPress={this.props.onAddressSelection}
+      />
     );
   }
 

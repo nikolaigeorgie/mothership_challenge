@@ -5,6 +5,7 @@ import { IAddressItem } from '../../../redux/Deliveries/interfaces';
 type Props = {
   item: IAddressItem;
   onPress(item: IAddressItem): void;
+  index: number;
 };
 
 class AddressesListItem extends PureComponent<Props> {
@@ -19,7 +20,11 @@ class AddressesListItem extends PureComponent<Props> {
 
   render() {
     return (
-      <AddressesListItemView item={this.props.item} onPress={this.onPress} />
+      <AddressesListItemView
+        item={this.props.item}
+        index={this.props.index}
+        onPress={this.onPress}
+      />
     );
   }
 }

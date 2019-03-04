@@ -43,6 +43,7 @@
     "@types/react-test-renderer": "^16.8.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.1.0",
+    "detox": "^10.0.12",
     "jest": "24.1.0",
     "metro-react-native-babel-preset": "0.52.0",
     "prettier": "^1.16.4",
@@ -52,5 +53,17 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "detox": {
+    "test-runner": "jest",
+    "specs": "e2e",
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/mothership_challenge.app",
+        "build": "xcodebuild -project ios/mothership_challenge.xcodeproj -UseNewBuildSystem=NO -scheme mothership_challenge -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 7 Plus"
+      }
+    }
   }
 }

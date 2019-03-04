@@ -88,7 +88,7 @@ class DirectionsScreenView extends PureComponent<Props> {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} testID="directionsContainer">
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View>
             <StandardNavBar
@@ -127,6 +127,7 @@ class DirectionsScreenView extends PureComponent<Props> {
             <MaterialButton
               onPress={this.props.nextButtonOnPress}
               text="Next"
+              testID="navigationToQuoteButton"
             />
           </View>
         )}
