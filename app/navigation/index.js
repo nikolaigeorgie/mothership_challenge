@@ -32,13 +32,13 @@ export function registerScreens() {
 
 export function startApp() {
   registerScreens();
-  Navigation.events().registerAppLaunchedListener(() => {
-    Navigation.setDefaultOptions({
-      topBar: {
-        visible: false,
-      },
-    });
+  Navigation.setDefaultOptions({
+    topBar: {
+      visible: false,
+    },
+  });
 
+  Navigation.events().registerAppLaunchedListener(() => {
     Navigation.setRoot({
       root: {
         sideMenu: {
@@ -49,6 +49,7 @@ export function startApp() {
                 {
                   component: {
                     name: Routes.MenuScreen,
+                    topBarHeight: 0,
                   },
                 },
               ],
@@ -61,6 +62,7 @@ export function startApp() {
                 {
                   component: {
                     name: Routes.DirectionsScreen,
+                    topBarHeight: 0,
                   },
                 },
               ],
@@ -73,6 +75,7 @@ export function startApp() {
                 {
                   component: {
                     name: Routes.RideHistoryScreen,
+                    topBarHeight: 0,
                   },
                 },
               ],
