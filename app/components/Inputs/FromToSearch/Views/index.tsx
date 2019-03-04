@@ -19,6 +19,7 @@ type Props = {
   toAddress: IAddress;
   currentSelection: string;
   onAddressSelection(item: IAddressItem): Promise<void>;
+  createToAddressRef(ref: any): any;
 };
 
 class FromToSearchView extends PureComponent<Props> {
@@ -45,6 +46,7 @@ class FromToSearchView extends PureComponent<Props> {
               placeholder="Deliver to"
               value={this.props.toAddress.value}
               testID="deliverToInput"
+              createInputRef={this.props.createToAddressRef}
             />
           </View>
         </View>

@@ -66,6 +66,7 @@ const INITIAL_STATE = {
 class FromToSearch extends PureComponent<Props, State> {
   private keyboardWillShowListener: EmitterSubscription | any;
   private keyboardWillHideListener: EmitterSubscription | any;
+  private toAddressInputField: any | null;
 
   constructor(props: Readonly<Props>) {
     super(props);
@@ -76,6 +77,8 @@ class FromToSearch extends PureComponent<Props, State> {
     this.keyboardWillShow = this.keyboardWillShow.bind(this);
     this.keyboardWillHide = this.keyboardWillHide.bind(this);
     this.onAddressSelection = this.onAddressSelection.bind(this);
+    this.createToAddressRef = this.createToAddressRef.bind(this);
+    this.toAddressInputField = null;
   }
 
   componentWillReceiveProps(props: any) {
@@ -124,7 +127,13 @@ class FromToSearch extends PureComponent<Props, State> {
   async searchForAddress(value: string) {
     const { currentSelection } = this.state;
     // @ts-ignore TODO: research why interpolation is not work with type screen
-    this.setState({ [currentSelection]: { value, isAddressSelected: false } });
+    await this.setState({
+      [currentSelection]: {
+        ...this.state[currentSelection],
+        value,
+        isAddressSelected: false,
+      },
+    });
     try {
       const {
         entity: { features: data },
@@ -137,20 +146,19 @@ class FromToSearch extends PureComponent<Props, State> {
         // ^ provided as two comma-separated coordinates in longitude,latitude order.
       });
       // @ts-ignore TODO: research why interpolation is not work with type screen
-      this.setState({
-        [currentSelection]: { ...this.state[currentSelection], data },
+      await this.setState({
+        [currentSelection]: {
+          ...this.state[currentSelection],
+          data,
+        },
       });
     } catch (err) {
-      return Alert.alert(
-        'Something went wrong',
-        'Please try searching again',
-      );
+      return Alert.alert('Something went wrong', 'Please try searching again');
     }
   }
 
   async onAddressSelection(item: IAddressItem) {
     const {
-      place_name,
       geometry: { coordinates },
       place_name: placeName,
     } = item;
@@ -163,8 +171,8 @@ class FromToSearch extends PureComponent<Props, State> {
     );
 
     if (
-      this.state.fromAddress.value === place_name ||
-      this.state.toAddress.value === place_name
+      this.state.fromAddress.value === placeName ||
+      this.state.toAddress.value === placeName
     ) {
       return Alert.alert(
         'No Same Addresses',
@@ -175,8 +183,8 @@ class FromToSearch extends PureComponent<Props, State> {
     // @ts-ignore TODO: research why interpolation is not work with type screen
     await this.setState({
       [currentSelection]: {
-        data: this.state[currentSelection].data,
-        value: place_name,
+        ...this.state[currentSelection],
+        value: placeName,
         selected: {
           placeName,
           coordinates: { lat, long },
@@ -190,6 +198,10 @@ class FromToSearch extends PureComponent<Props, State> {
       currentSelection: '',
     });
 
+    if (this.state.fromAddress.isAddressSelected) {
+      this.toAddressInputField.focus();
+    }
+
     if (
       this.state.fromAddress.isAddressSelected &&
       this.state.toAddress.isAddressSelected
@@ -200,6 +212,11 @@ class FromToSearch extends PureComponent<Props, State> {
         this.state.toAddress.selected,
       );
     }
+  }
+
+  createToAddressRef(ref: any) {
+    console.log('ref', ref);
+    this.toAddressInputField = ref;
   }
 
   render() {
@@ -213,6 +230,7 @@ class FromToSearch extends PureComponent<Props, State> {
         addressListIsOpen={this.state.addressListIsOpen}
         currentSelection={this.state.currentSelection}
         onAddressSelection={this.onAddressSelection}
+        createToAddressRef={this.createToAddressRef}
       />
     );
   }

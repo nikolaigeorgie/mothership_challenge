@@ -8,11 +8,13 @@ type Props = {
   onChangeText(text: string): void;
   onFocus(): void;
   testID: string;
+  createInputRef(ref: any): any;
 };
 
 class StandardInput extends PureComponent<Props> {
   static defaultProps = {
     width: '100%',
+    createInputRef: () => {},
   };
 
   render() {
@@ -24,6 +26,7 @@ class StandardInput extends PureComponent<Props> {
         onFocus={this.props.onFocus}
         value={this.props.value}
         testID={this.props.testID}
+        createInputRef={this.props.createInputRef}
       />
     );
   }

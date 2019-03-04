@@ -9,7 +9,8 @@ type Props = {
   value: string;
   onChangeText(text: string): void;
   onFocus(): void;
-  testID: string
+  testID: string;
+  createInputRef(ref: any): any;
 };
 
 class StandardInputView extends PureComponent<Props> {
@@ -23,6 +24,7 @@ class StandardInputView extends PureComponent<Props> {
         onFocus={this.props.onFocus}
         onChangeText={this.props.onChangeText}
         testID={this.props.testID}
+        ref={this.props.createInputRef}
       />
     );
   }
