@@ -111,6 +111,7 @@ class DirectionsScreenView extends PureComponent<Props> {
         />
         <View style={styles.mapboxContainer}>
           <MapboxGL.MapView
+            // RANDOM COORDINATES
             centerCoordinate={[-118, 34]}
             style={styles.map}
             ref={this.props.registerMapRef}

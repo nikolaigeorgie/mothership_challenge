@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import styles from './styles';
+import { Images } from '../../../themes';
 
 class FromToLine extends PureComponent {
   render() {
@@ -8,7 +9,7 @@ class FromToLine extends PureComponent {
       <View style={styles.container}>
         <View style={styles.fromDot} />
         <View style={styles.fromToSeparator} />
-        <View style={styles.toDot} />
+        <Image source={Images.redArrow} style={styles.downArrow} />
       </View>
     );
   }

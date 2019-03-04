@@ -3,7 +3,8 @@ const images = {
   historyIcon: require('../assets/images/historyIcon.png'),
   mothershipLogo: require('../assets/images/mothershipLogo.png'),
   leftArrow: require('../assets/images/left-arrow.png'),
-  downArrow: require('../assets/images/down-arrow.png')
+  downArrow: require('../assets/images/down-arrow.png'),
+  redArrow: require('../assets/images/red-arrow.png'),
 };
 
 export default images;

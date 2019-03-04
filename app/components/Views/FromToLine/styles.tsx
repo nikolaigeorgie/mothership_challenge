@@ -21,10 +21,8 @@ export default StyleSheet.create({
     height: '53%',
     backgroundColor: Colors.darkGrey,
   },
-  toDot: {
-    backgroundColor: Colors.red,
-    borderRadius: FROM_DOT_WIDTH / 2,
+  downArrow: {
     height: FROM_DOT_HEIGHT,
-    width: FROM_DOT_WIDTH,
+    width: Scaled.screen.width * 0.04,
   },
 });
