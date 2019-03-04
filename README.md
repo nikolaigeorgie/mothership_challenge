@@ -14,7 +14,10 @@ Mapbox will not work without adding corresponding key to app/config/keys.js `lin
 
 ## TESTING
 
-(Documentation coming soon)
+Run `detox build --configuration ios.sim.debug` to generate a build.
+Run `detox test --configuration ios.sim.debug` to start the test.
+Tests are located in `e2e/` folder
+
 
 ## Structure:
 
@@ -29,12 +32,3 @@ Application logic is in the `app` folder structured as follows:
 - navigation: Components to manage the navigation instance & other functions.
 - themes: Constants for scales (sizes), fonts, colors, and images.
 - e2e: Detox testing
-
-
-## STATE MANAGMENT
-
-(Documentation coming soon)
-
-## MVC
-
-(Documentation coming soon)
